@@ -133,6 +133,14 @@ public class T16_DialogueTest extends Application{
 			
 			try {
 				parent = FXMLLoader.load(getClass().getResource("myDialog.fxml"));
+				
+				//만약 컨트롤러가 이미 있는 애를 가져오려면...
+				
+//				FXMLLoader loader = new FXMLLoader(getClass().getResource("~.fxml"));
+//				loader.getController(); //이러면 이 객체의 컨트롤러를 가져올 수 있다.
+				//그리구 컨트롤러 안의 메소드를 불러오라
+				
+				
 			}catch(IOException ex) {ex.printStackTrace();}
 			
 			

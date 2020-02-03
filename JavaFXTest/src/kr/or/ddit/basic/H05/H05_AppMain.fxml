@@ -5,24 +5,22 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
-prefHeight="260.0" prefWidth="440.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
-fx:controller="kr.or.ddit.basic.H05.H05_Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="260.0" prefWidth="440.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.H05.H05_Controller">
    <children>
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn fx:id="name" prefWidth="100.0" text="이름" />
-          <TableColumn fx:id="korean" minWidth="100.0" prefWidth="75.0" text="국어" />
-            <TableColumn fx:id="math" prefWidth="100.0" text="수학" />
-            <TableColumn fx:id="english" prefWidth="100.0" text="영어" />
+          <TableColumn fx:id="name" prefWidth="100.0" style="-fx-alignment: center;" text="이름" />
+          <TableColumn fx:id="korean" prefWidth="100.0" style="-fx-alignment: center;" text="국어" />
+            <TableColumn fx:id="math" prefWidth="100.0" style="-fx-alignment: center;" text="수학" />
+            <TableColumn fx:id="english" prefWidth="100.0" style="-fx-alignment: center;" text="영어" />
         </columns>
       </TableView>
       <HBox alignment="CENTER" spacing="10.0">
          <children>
             <Button fx:id="add" mnemonicParsing="false" onAction="#addScore" text="추가" />
-            <Button fx:id="barGraph" mnemonicParsing="false" onAction="#showBar" text="막대그래프" />
+            <Button fx:id="del" mnemonicParsing="false" onAction="#delScore" text="삭제" />
             <Button fx:id="pieGraph" mnemonicParsing="false" onAction="#showPie" text="파이그래프" />
+            <Button fx:id="barGraph" mnemonicParsing="false" onAction="#showBar" text="전체 막대그래프" />
          </children>
       </HBox>
    </children>
