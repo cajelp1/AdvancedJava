@@ -12,14 +12,13 @@ public class T02_FileTest {
 		File f1 = new File("e:/D_Other/sample.txt");
 		File f2 = new File("e:/D_Other/test.txt");
 		
-		if(f1.exists()){
+		if(f1.exists()){ //파일이 있는지 확인하는 메소드
 			System.out.println(f1.getAbsolutePath() + "은 존재합니다.");
 		}else{
 			System.out.println(f1.getAbsolutePath() + "은 없는 파일입니다.");
 			try {
-				if(f1.createNewFile()){
-					System.out.println(f1.getAbsolutePath() + 
-											"파일을 새로 만들었습니다.");
+				if(f1.createNewFile()){ //파일을 생성하는 메소드
+					System.out.println(f1.getAbsolutePath() + "파일을 새로 만들었습니다.");
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
