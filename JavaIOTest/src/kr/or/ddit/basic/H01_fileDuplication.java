@@ -1,5 +1,6 @@
 package kr.or.ddit.basic;
 
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,12 +15,14 @@ public class H01_fileDuplication {
 		
 		FileInputStream fin = new FileInputStream("e:/D_Other/Tulips.jpg");
 		FileOutputStream fout = new FileOutputStream("e:/D_Other/복사본_Tulips.jpg");
+		BufferedOutputStream bout = new BufferedOutputStream(fout);
 		
 		int c;
 		
 		while((c = fin.read()) != -1) {
-			fout.write(c);
+			bout.write(c);
 		}
+		bout.close();
 		System.out.println("복사완료");
 		
 		fin.close();
