@@ -70,7 +70,6 @@ public class RemoteServer extends UnicastRemoteObject implements RemoteInterface
 		System.out.println("testId : " + vo.getTestId());
 		System.out.println("testNum : " + vo.getTestNum());
 		System.out.println("testVO객체 출력 끝...");
-		
 	}
 
 	@Override

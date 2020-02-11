@@ -65,9 +65,9 @@ public class ChatClientImpl extends UnicastRemoteObject implements ChatClient, R
 
           System.out.println(e);
 
-       }      
+       }
 
-   }  
+   }
 
    public static void main(String[] args) throws Exception {
 	   
