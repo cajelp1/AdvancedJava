@@ -26,7 +26,5 @@ public class T01_InetAddressTest {
 			System.out.println(nIp.toString());
 		}
 		
-		
-		
 	}
 }
