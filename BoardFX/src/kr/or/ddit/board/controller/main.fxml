@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.board.controller.MainCont">
+   <children>
+      <ComboBox fx:id="combo" layoutX="20.0" layoutY="18.0" prefWidth="100.0" />
+      <TextField fx:id="txtField" layoutX="131.0" layoutY="18.0" prefWidth="315.0" />
+      <Button fx:id="btnSearch" layoutX="456.0" layoutY="18.0" mnemonicParsing="false" onAction="#searchBoard" text="검색" />
+      <Button fx:id="btnWrite" layoutX="508.0" layoutY="18.0" mnemonicParsing="false" onAction="#WriteBoard" text="새 글 작성" />
+      <TableView fx:id="table" layoutX="20.0" layoutY="55.0" prefHeight="280.0" prefWidth="560.0">
+        <columns>
+          <TableColumn fx:id="board_no" prefWidth="60.0" text="번호" />
+          <TableColumn fx:id="board_title" prefWidth="300.0" text="제목" />
+            <TableColumn fx:id="board_writer" prefWidth="100.0" text="작성자" />
+            <TableColumn fx:id="board_date" prefWidth="100.0" text="날짜" />
+        </columns>
+      </TableView>
+      <Pagination fx:id="pagination" layoutX="10.0" layoutY="55.0" prefHeight="340.0" prefWidth="580.0" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</AnchorPane>

@@ -1,36 +1,38 @@
 package vo;
+
 /**
- * 클라이언트 정보를 담기 위한 VO
- * @author HelloJava
+ * 클라이언트의 정보를 담기위한 VO
+ * @author PC-20
  *
  */
 public class ClientVO {
-	private String ipAddr; // IP주소
-	private String chatName; // 대화명
-	private int portNum; 		// 포트번호
-	public ClientVO(String ipAddr, int portNum, String chatName) {
+	private String ip;		//ip주소
+	private String name;	//채팅에서 쓰는 유저 이름
+	private int port;		//접속하는 서버의 포트번호
+	
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getPort() {
+		return port;
+	}
+	public void setPort(int port) {
+		this.port = port;
+	}
+	public ClientVO(String ip, String name, int port) {
 		super();
-		this.ipAddr = ipAddr;
-		this.portNum = portNum;
-		this.chatName = chatName;
-	}
-	public String getIpAddr() {
-		return ipAddr;
-	}
-	public void setIpAddr(String ipAddr) {
-		this.ipAddr = ipAddr;
-	}
-	public int getPortNum() {
-		return portNum;
-	}
-	public void setPortNum(int portNum) {
-		this.portNum = portNum;
-	}
-	public String getChatName() {
-		return chatName;
-	}
-	public void setChatName(String chatName) {
-		this.chatName = chatName;
+		this.ip = ip;
+		this.name = name;
+		this.port = port;
 	}
 	
 }
