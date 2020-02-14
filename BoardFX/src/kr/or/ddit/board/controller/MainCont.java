@@ -82,7 +82,7 @@ public class MainCont {
     	        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
     	            if(mouseEvent.getClickCount() == 2){
     	                
-    	            	//새로운 컨트롤러 소환
+    	            	//새로운 컨트롤러 및 창소환
     	            	Stage boardCont = new Stage(StageStyle.UTILITY);
     	            	boardCont.initModality(Modality.APPLICATION_MODAL);
     	            	
@@ -96,7 +96,7 @@ public class MainCont {
     	        			// 해당 fxml에 연결된 컨트롤러 호출
     	        			BoardCont bCont = loader.getController();
     	        			
-    	        			// 컨트롤러 시작시 선택된객체 넘겨주기
+    	        			// 컨트롤러 시작시 선택된 객체 넘겨주기
     	        			bCont.initialize(table.getSelectionModel().getSelectedItem());
     	            		
     	        			// 창띄우기
@@ -184,7 +184,7 @@ public class MainCont {
     @FXML
     void WriteBoard(ActionEvent event) {
     	
-    	//새로운 컨트롤러 소환
+    	//새로운 컨트롤러 및 창소환
     	Stage boardCont = new Stage(StageStyle.UTILITY);
     	boardCont.initModality(Modality.APPLICATION_MODAL);
     	
@@ -198,7 +198,7 @@ public class MainCont {
 			// 해당 fxml에 연결된 컨트롤러 호출
 			BoardCont bCont = loader.getController();
 			
-			// 컨트롤러 시작시 선택된객체 넘겨주기
+			// 컨트롤러 시작
 			bCont.initialize();
     		
 			// 창띄우기

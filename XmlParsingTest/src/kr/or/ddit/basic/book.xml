@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <booklist>
 	<book isbn = "B001" kind = "JAVA">
+		<!-- 주석임 -->
 		<title>자바초급</title>
 		<author>이순신</author>
 		<price>25000</price>

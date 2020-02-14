@@ -39,6 +39,9 @@ public class DOMParsing {
 			Node firstBookNode = bookNodeList.item(0); //첫번째 아이템
 			Element bookElement = (Element)firstBookNode;
 			
+			Element bookElement2 = (Element)bookNodeList.item(0); //이런 형식으로 쓰는것도 ok!
+			//element형식으로 써야할 필요가 있기에 변환... 흠.
+			
 			// 속성 접근방법1 : 엘리먼트 객체의 getAttribute()메서드 이용
 			String isbn = bookElement.getAttribute("isbn");
 			System.out.println("bookElement.getAttribute(\"isbn\") = >" + isbn);
