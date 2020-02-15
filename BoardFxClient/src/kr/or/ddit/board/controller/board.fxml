@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.board.controller.BoardCont">
+   <children>
+      <TextArea fx:id="board_content" layoutX="20.0" layoutY="50.0" prefHeight="300.0" prefWidth="560.0" />
+      <Label layoutX="394.0" layoutY="18.0" text="작성자 : " />
+      <TextField fx:id="board_writer" layoutX="442.0" layoutY="14.0" />
+      <TextField fx:id="board_title" layoutX="68.0" layoutY="14.0" prefWidth="300.0" />
+      <Label layoutX="20.0" layoutY="18.0" text="제목 : " />
+      <Button fx:id="btnEdit" layoutX="20.0" layoutY="365.0" mnemonicParsing="false" onAction="#editBoard" text="글 수정" />
+      <Button fx:id="btnDelete" layoutX="84.0" layoutY="365.0" mnemonicParsing="false" onAction="#deleteBoard" text="글 삭제" />
+      <Button fx:id="btnOk" layoutX="442.0" layoutY="365.0" mnemonicParsing="false" onAction="#ok" text="확인" />
+      <Button fx:id="btnCancel" layoutX="491.0" layoutY="365.0" mnemonicParsing="false" onAction="#cancel" text="취소" />
+      <Button fx:id="btnClose" layoutX="540.0" layoutY="365.0" mnemonicParsing="false" onAction="#close" text="닫기" />
+   </children>
+</AnchorPane>
