@@ -20,7 +20,7 @@ public class RemoteClient {
 		//Registry서버에 등록된 객체를 구한다.
 		try {
 			// 1. 등록된 원격객체를 찾기위해 Registry객체를 생성한 후 사용할 객체를 불러온다.
-			Registry reg = LocateRegistry.getRegistry("192.168.205.10", 8888);
+			Registry reg = LocateRegistry.getRegistry("localhost", 8888);
 			RemoteInterface clientInf = (RemoteInterface) reg.lookup("server");
 			
 			//이제부터 불러온 객체의 메서드를 호출해서 사용할 수 있다.

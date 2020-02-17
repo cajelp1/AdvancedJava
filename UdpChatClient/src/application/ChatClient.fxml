@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainController">
+   <children>
+      <Button fx:id="btnSend" layoutX="396.0" layoutY="363.0" mnemonicParsing="false" onAction="#msgSend" text="전송" />
+      <Button fx:id="btnExit" layoutX="446.0" layoutY="363.0" mnemonicParsing="false" onAction="#chatExit" text="종료" />
+      <Label layoutX="15.0" layoutY="14.0" text="채팅 클라이언트 이름 :" />
+      <TextField fx:id="cText" layoutX="15.0" layoutY="363.0" prefHeight="23.0" prefWidth="367.0" />
+      <TextField fx:id="cName" editable="false" layoutX="151.0" layoutY="10.0" prefHeight="23.0" prefWidth="124.0" />
+      <TextArea fx:id="txArea" layoutX="15.0" layoutY="37.0" prefHeight="319.0" prefWidth="470.0" />
+   </children>
+</AnchorPane>

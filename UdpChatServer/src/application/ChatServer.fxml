@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
    <children>
-      <ListView layoutX="15.0" layoutY="37.0" prefHeight="319.0" prefWidth="470.0" />
-      <Button layoutX="348.0" layoutY="363.0" mnemonicParsing="false" text="서버시작" />
-      <Button layoutX="422.0" layoutY="363.0" mnemonicParsing="false" text="서버종료" />
+      <ListView fx:id="lvClient" layoutX="15.0" layoutY="37.0" prefHeight="319.0" prefWidth="470.0" />
+      <Button layoutX="348.0" layoutY="363.0" mnemonicParsing="false" onAction="#turnOnServer" text="서버시작" />
+      <Button layoutX="422.0" layoutY="363.0" mnemonicParsing="false" onAction="#turnOffServer" text="서버종료" />
       <Label layoutX="15.0" layoutY="14.0" text="채팅 서버" />
    </children>
 </AnchorPane>

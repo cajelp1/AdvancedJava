@@ -1,5 +1,6 @@
 package kr.or.ddit.board.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BoardVO {
@@ -8,7 +9,7 @@ public class BoardVO {
 	private String board_title;
 	private String board_writer;
 	private String board_content;
-	private Date board_date;
+	private String board_date;
 	
 	public int getBoard_no() {
 		return board_no;
@@ -34,11 +35,14 @@ public class BoardVO {
 	public void setBoard_content(String board_content) {
 		this.board_content = board_content;
 	}
-	public Date getBoard_date() {
+	public String getBoard_date() {
 		return board_date;
 	}
 	public void setBoard_date(Date board_date) {
-		this.board_date = board_date;
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String toString = format.format(board_date);
+		this.board_date = toString;
 	}
 	
 }

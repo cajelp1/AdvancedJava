@@ -13,10 +13,10 @@
       <Button fx:id="btnWrite" layoutX="508.0" layoutY="18.0" mnemonicParsing="false" onAction="#WriteBoard" text="새 글 작성" />
       <TableView fx:id="table" layoutX="20.0" layoutY="55.0" prefHeight="280.0" prefWidth="560.0">
         <columns>
-          <TableColumn fx:id="board_no" prefWidth="60.0" text="번호" />
+          <TableColumn fx:id="board_no" prefWidth="60.0" style="-fx-alignment: CENTER;" text="번호" />
           <TableColumn fx:id="board_title" prefWidth="300.0" text="제목" />
             <TableColumn fx:id="board_writer" prefWidth="100.0" text="작성자" />
-            <TableColumn fx:id="board_date" prefWidth="100.0" text="날짜" />
+            <TableColumn fx:id="board_date" prefWidth="100.0" style="-fx-alignment: CENTER;" text="날짜" />
         </columns>
       </TableView>
       <Pagination fx:id="pagination" layoutX="10.0" layoutY="55.0" prefHeight="340.0" prefWidth="580.0" />

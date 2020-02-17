@@ -28,7 +28,7 @@ public class ClientVO {
 	public void setPort(int port) {
 		this.port = port;
 	}
-	public ClientVO(String ip, String name, int port) {
+	public ClientVO(String ip, int port, String name) {
 		super();
 		this.ip = ip;
 		this.name = name;
