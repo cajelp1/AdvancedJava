@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="goodCom">
+
+	
+	<select id="goodCom.searchGoodCom" resultClass="comVO" parameterClass="comVO">
+	
+		select 
+			mem_no,
+			com_name,
+			com_addr,
+			com_tel,
+			com_cat,
+			com_key,
+			com_opentime,
+			com_closetime,
+			com_parking,
+			com_menu,
+			com_photo,
+			com_foodprice
+		from com 
+		where com_id =#com_id#
+
+	
+	</select>
+	<select id="goodCom.isVipCom" resultClass="memVO" parameterClass="String">
+	
+	  select com.com_name,member.mem_name,
+      com.com_id, member.mem_hp, com.com_tel
+      from
+      com,review,member
+      where com.com_id=review.com_id
+      and member.mem_no = com.mem_no
+      and
+      re_date>=to_date(add_months(sysdate,-1))
+      and com.com_id = #com_id#
+      group by member.mem_name, com.com_id, com.com_name, member.mem_hp,
+      com.com_tel
+      having
+      avg(review.re_score) > 2.3 
+      and count(review.re_no)> 19
+
+	
+	</select>
+
+
+</sqlMap>			
+
+
+
+
+

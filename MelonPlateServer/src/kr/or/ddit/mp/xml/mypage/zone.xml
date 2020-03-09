@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="zone">
+
+	<!--1.동으로 검색하기-->
+	<select id="selectZone" resultClass="ZiptbVO" parameterClass="String">
+	 		SELECT distinct sido, gugun, dong 
+	 	  	  FROM ziptb
+	 	  		<![CDATA[
+			 WHERE dong like '%' || #dong# || '%' 
+				]]>  
+	</select>
+	
+	<!--2. 관심지역1에 셋팅하기-->
+	<insert id="insertZone1" parameterClass="ZoneVO">
+		INSERT INTO zone(mem_no, zone1) 
+			 VALUES (#mem_no#, #zone1#) 
+	</insert>
+
+ 	<!--3. 관심지역2 셋팅하기 -->
+	<update id="updateZone2" parameterClass="ZoneVO">
+		UPDATE zone set zone2 = #zone2#
+    	 WHERE mem_no = #mem_no#
+    </update>
+    
+    <!--4. 관심지역3 셋팅하기 -->
+	<update id="updateZone3" parameterClass="ZoneVO">
+		UPDATE zone set zone3 = #zone3#
+    	 WHERE mem_no = #mem_no#
+    </update>
+
+	<!--5. 관심지역3 삭제 -->
+	<update id="deleteZone3" parameterClass="ZoneVO">
+		UPDATE zone set zone3 = null
+    	 WHERE mem_no = #mem_no#
+    </update>
+    
+    <!--5. 관심지역2 삭제 -->
+	<update id="deleteZone2" parameterClass="ZoneVO">
+		UPDATE zone set zone2 = null
+    	 WHERE mem_no = #mem_no#
+    </update>
+    
+     <!--5. 관심지역1 삭제 -->
+	<update id="deleteZone1" parameterClass="ZoneVO">
+		UPDATE zone set zone1 = null
+    	 WHERE mem_no = #mem_no#
+    </update>
+    
+    <!--설정된 값 조회하기-->
+	<select id="selectZoneChoice" resultClass="ZoneVO" parameterClass="ZoneVO">
+	 		SELECT mem_no, zone1, zone2, zone3
+	 		  FROM zone
+	 		  WHERE mem_no = #mem_no#
+	</select>
+</sqlMap>

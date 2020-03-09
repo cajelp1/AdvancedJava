@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="login">
+   
+   <!-- 
+      이 영역에 sql문에 맞는 태그를 사용하여 SQL문을 기술한다.
+      
+      사용 할 수 있는 기본적인 태그들
+      
+      <select> ~~~~~ </select>
+      <insert> ~~~~~ </insert>
+      <update> ~~~~~ </update>
+      <delete> ~~~~~ </delete>
+      
+      위 태그에서 사용되는 속성들
+      
+      1) id속성 : 해당 태그를 호출할 때 <sqlMap>태그의 namespace와 연결하여 사용하는 이름
+      
+      2) parameterClass속성 : sql문에 사용 될 데이터가 들어있는 객체를 지정한다.
+                        (보통 VO클래스, 자바의 자료형이름 등이 사용된다.)
+                        (typeAlias로 지정한 alias명을 사용 할 수 있다.)
+      
+      3) resultClass속성 : select문을 실행한 결과를 담을 객체를 지정한다.
+                     (보통 VO클래스나 자바의 자료형이름을 사용한다.)
+    -->
+    
+    
+    
+<!--    mem_id -->
+<!-- 	mem_no -->
+<!-- 	mem_pw -->
+<!-- 	mem_name -->
+<!-- 	mem_nick -->
+<!-- 	mem_birth -->
+<!-- 	mem_mail -->
+<!-- 	mem_hp -->
+<!-- 	mem_addr -->
+<!-- 	melonage -->
+<!-- 	mem_grade -->
+
+	<!-- 로그인 하기 / id와 pw가 일치하면 로그인 시킨다.  -->
+   <select id="login.select" resultClass="kr.or.ddit.mp.vo.member.MemberVO">
+   		select * from MEMBER where mem_id = #mem_id# AND mem_pw = #mem_pw#
+   </select>
+    
+	<!-- 아이디 찾기   -->
+    <select id="login.idSearch" resultClass="kr.or.ddit.mp.vo.member.MemberVO" parameterClass="kr.or.ddit.mp.vo.member.MemberVO">
+		select mem_id from member
+		where mem_name = #mem_name#
+		AND
+		mem_hp = #mem_hp#
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="login.pwSearch" resultClass="kr.or.ddit.mp.vo.member.MemberVO" parameterClass="kr.or.ddit.mp.vo.member.MemberVO"> 
+		select mem_pw from member
+		where mem_id = #mem_id# AND mem_name = #mem_name# AND mem_hp = #mem_hp#
+	</select>
+	
+	
+	<select id="login.iscom" resultClass="kr.or.ddit.mp.vo.member.ComVO" parameterClass="String"> 
+		select * from com, member where com.mem_no = member.mem_no and member.mem_no = #String#
+	</select>
+	
+	
+	
+	
+	
+	<!-- 세션을 위한 유저의 번호 찾기 -->
+	<select id = "login.memnoSearch" resultClass="kr.or.ddit.mp.vo.member.MemberVO" parameterClass="kr.or.ddit.mp.vo.member.MemberVO">
+		select  mem_id 
+		
+		,mem_no
+		,mem_pw
+		,mem_name
+		,mem_nick
+		,mem_birth
+		,mem_hp
+		,mem_addr
+		,melonage
+		,mem_grade
+		,mem_email
+		,mem_zipcode
+		
+		from member
+		where mem_id = #mem_id#
+	</select>
+    
+</sqlMap>
+
+
+

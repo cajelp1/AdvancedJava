@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="eatdealQA">
+	<!--1. 잇딜 Q&A 게시판 전체 조회-->
+	<select id="selectQA" resultClass="eatqnaVO" parameterClass="String">
+	<!-- 리뷰리스트에 출력되는 컬럼 : 닉네임, 리뷰내용, 평점, 수정/삭제/신고 기능 -->
+	SELECT ROWNUM, X.*
+        FROM ( 
+	 	SELECT a.eatqa_no, a.eat_no, b.eat_name, a.eatqa_title, a.in_date, a.eatqa_cont, c.mem_nick, a.eatqa_com, a.eatqa_com_st, a.up_date 
+		    FROM eatqa a, eatdeal b, member c
+		   WHERE a.eat_no = b.eat_no
+		     AND a.mem_no = c.mem_no
+		     AND a.eat_no = #eat_no#
+		     ORDER BY  a.in_date desc
+		      ) X 
+	</select>
+	
+	<!--2. 잇딜 Q&A 상세내용 보기-->
+	<select id="selectQAdetail" resultClass="eatqnaVO" parameterClass="eatqnaVO">
+	<!-- 리뷰리스트에 출력되는 컬럼 : 닉네임, 리뷰내용, 평점, 수정/삭제/신고 기능 -->
+	 	SELECT a.eatqa_no, a.eat_no, b.eat_name, a.eatqa_title, a.in_date, a.eatqa_cont, c.mem_nick, a.eatqa_com, a.eatqa_com_st, a.up_date 
+		    FROM eatqa a, eatdeal b, member c
+		   WHERE a.eat_no   = b.eat_no
+		     AND a.mem_no   = c.mem_no
+		     AND a.eat_no   = #eat_no#
+		     AND a.eatqa_no = #eatqa_no#
+	</select>
+	
+	<!--3. 잇딜 Q&A 작성-->
+	<insert id="insertQA" parameterClass="eatqnaVO">
+		INSERT INTO eatqa (eatqa_no, eat_no, eatqa_title, in_date, eatqa_cont, mem_no, eatqa_com_st )
+	 		VALUES ( (SELECT NVL(MAX(eatqa_no),0)+1 FROM eatqa), #eat_no#, #eatqa_title#, sysdate, #eatqa_cont#, #mem_no#, 'N')   
+	</insert>
+
+</sqlMap>

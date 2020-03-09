@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="join">
+
+    
+    
+    <select id="selectId" resultClass="MemberVO" parameterClass="String">
+    
+    	select mem_id from member where mem_id = #mem_id#
+    	
+    </select>
+    
+    <select id="selectNick" resultClass="MemberVO" parameterClass="String">
+    
+    	select mem_nickname from member where mem_nickname = #mem_nickname#
+    	
+    </select>
+    
+    <insert id="insertMember" parameterClass="MemberVO">
+       
+       	insert into member (mem_id, mem_password, mem_name, mem_nickname, 
+       			mem_jimin_no, mem_email, mem_hp, mem_status, mem_date, mem_mileage, role_code,
+       			mem_addr1, mem_addr2, mem_zipcode)
+       	values (#mem_id#, #mem_password#, #mem_name#, #mem_nickname#, 
+       			#mem_jimin_no#, #mem_email#, #mem_hp#, 't', sysdate, 0, 1,
+       			#mem_addr1#, #mem_addr2#, #mem_zipcode#)
+    	
+    	<selectKey keyProperty="mem_id" resultClass="String">
+			select mem_id from member where mem_id = #mem_id#
+		</selectKey>
+    
+    </insert>
+    
+    
+    
+</sqlMap>
+

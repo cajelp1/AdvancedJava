@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="review">
+
+	<!--1.리뷰 전체 조회-->
+	<select id="selectList" resultClass="ReviewVO" parameterClass="String">
+	<!-- 리뷰리스트에 출력되는 컬럼 : 닉네임, 리뷰내용, 평점, 수정/삭제/신고 기능 -->
+	 		SELECT ROWNUM, X.*
+       		 FROM (      
+	                SELECT a.re_no, a.com_id, b.mem_nick, a.re_title, a.re_cont, to_char(a.re_date, 'yyyy-mm-dd') as re_date, a.re_photo, a.re_score, a.re_up, a.re_down 
+	                  FROM review a, member b
+	                   WHERE a.mem_no = b.mem_no
+	                     AND a.com_id = #com_id#
+	                     ORDER BY re_date desc
+                    ) X  
+	</select>
+	
+	<!--1-1.리뷰 상세내용 조회 -> 화면정의서에 따로 없어서 노트에 필기해놈-->
+	<select id="selectListDetail" resultClass="ReviewVO" parameterClass="ReviewVO" >
+	 		SELECT ROWNUM, X.*
+       			 FROM ( 
+	                    SELECT a.re_no, a.com_id, a.re_title, a.re_cont, b.mem_nick, a.re_date, a.re_photo, a.re_up, a.re_down, a.re_score
+	                        FROM REVIEW a, member b
+	                        WHERE a.mem_no	 = b.mem_no
+	                          AND a.com_id   = #com_id#  
+	                          AND b.mem_nick = #mem_nick#
+                        ) X   
+	</select>
+
+	<!--2.리뷰 평점별 정렬 -->
+	<select id="selectListSort" resultClass="ReviewVO" parameterClass="String">
+		  SELECT b.mem_nick, a.re_title, a.re_photo, a.re_score, a.re_up, a.re_down 
+            from review a -- member b, com c
+            inner join member b on (a.mem_no=b.mem_no)
+            inner join com c on (a.mem_no=c.mem_no)
+            where c.com_id = #com_id#
+            order by a.re_score desc
+    </select>
+
+	<!--3.자신이 쓴 리뷰 조회-->
+	<select id="selectListMy" resultClass="ReviewVO" parameterClass="ReviewVO">
+	 	  SELECT ROWNUM, X.*
+  			FROM ( SELECT b.re_no, a.com_id, a.com_name, b.re_title, b.re_cont, to_char(b.re_date, 'yyyy-mm-dd') as re_date, b.re_score
+		            FROM com a, review b
+		            WHERE a.com_id = b.com_id
+		              AND b.mem_no = #mem_no#
+		            ORDER BY re_date desc
+       			  ) X 
+	</select>
+	
+	<!--4. 리뷰 작성-->
+	<!--로그인하면 회원번호 입력할 수 있게 구현해야 함!-->
+	<insert id="insertReview" parameterClass="ReviewVO">
+		INSERT INTO review (re_no, com_id, re_title, re_date, re_cont, re_score, re_photo, mem_no, re_up, re_down)
+	 		VALUES ((select nvl(max(re_no),0)+1 from review), #com_id#, #re_title#, sysdate, #re_cont#, #re_score#, #re_photo#, #mem_no#,0,0)   
+	</insert>
+	
+	<!--5. 리뷰 삭제 -->
+	<update id="deleteReview" parameterClass="ReviewVO">
+		DELETE FROM review 
+        WHERE re_no=#re_no# and mem_no=#mem_no#
+    </update>
+    
+    <!--6. 리뷰 수정 -->
+	<update id="updateReview" parameterClass="ReviewVO">
+		UPDATE review SET 
+               re_title = #re_title#,
+               re_cont  = #re_cont#,
+               re_score = #re_score#
+      	WHERE mem_no=#mem_no# and re_no=#re_no#
+    </update>
+    
+     <!--7. 리뷰 추천 -->
+	<update id="upReview" parameterClass="String">
+		UPDATE review SET re_up = re_up + 1 
+		WHERE  re_no=#re_no#
+    </update>
+    
+    <!--8. 리뷰 신고 -->
+    <update id="downReview" parameterClass="String">
+		UPDATE review SET re_down = re_down + 1 
+		WHERE  re_no=#re_no#
+    </update>
+	
+<!--여기서부터 관리자 메뉴 -->
+	
+	<!--9. 관리자 리뷰 관리리스트 -->
+	<select id="selectListAdmin" resultClass="ReviewVO" parameterClass="ReviewVO" >
+	 	Select b.re_no, a.mem_id, b.re_title, b.re_cont, c.com_name, b.re_score, b.re_date, b.re_up, b.re_down
+    		FROM member a, review b, com c
+     		  WHERE a.mem_no=b.mem_no
+     		    AND b.com_id=c.com_id
+     			AND b.re_down>=10
+	</select>
+	
+	<!--10. 관리자 리뷰 삭제 -->
+	<update id="deleteAdminReview" parameterClass="ReviewVO">
+		DELETE FROM review where re_no = #re_no#
+    </update>
+    
+<!--여기서부터 홀릭 달성 페이지 -->  
+<!--11. 홀릭 달성 페이지 -->
+	<select id="checkHolic" resultClass="ReviewVO" parameterClass="ReviewVO" >
+	 	SELECT trunc(count_review/30*100) as holic, mem_nick from 
+		    ( SELECT count(a.re_no) as count_review, b.mem_nick as mem_nick, sum(a.re_up)
+			    FROM review a, member b
+		       	 WHERE a.mem_no = b.mem_no
+		           AND b.mem_no = #mem_no#
+		           GROUP BY b.mem_nick
+		           HAVING sum(a.re_up)>=30
+		      )
+	</select>
+	
+	<select id="clickedReviewNo" resultClass="ReviewVO" parameterClass="String" >
+	 	select re_no,
+			com_id,
+			re_title,
+			re_date,
+			re_cont,
+			re_up,
+			re_down,
+			mem_no,
+			re_score,
+			re_photo 
+		from review 
+		where re_no = #re_no#
+	</select>
+
+</sqlMap>

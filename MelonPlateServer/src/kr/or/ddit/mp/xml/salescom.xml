@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="salescom">
+
+	
+	<select id="salescom.salesList" resultClass="salesVO" parameterClass="String">
+	
+		select rownum, x.* from (
+			select a.eat_name, 
+			sum(a.order_qty) as order_qty, 
+			sum(a.order_price) as order_price, 
+			b.eat_price
+			from request a , eatdeal b
+			where a.eat_no = b.eat_no
+			and b.com_id= #comid#
+			group by a.eat_name, b.eat_price) x
+		
+	</select>
+	
+	
+
+</sqlMap>			
+
+
+
+
+

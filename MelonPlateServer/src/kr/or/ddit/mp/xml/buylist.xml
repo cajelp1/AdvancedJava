@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="mybuylist">
+	<!--
+	 -->
+	
+		
+	<delete id="deletebuylist" parameterClass="rvo"> 
+	
+		delete from request where mem_no = #mem_no# and order_no = #order_no#
+		
+	</delete>
+	
+	
+	<select id="getAllbuyList" resultClass="rvo" parameterClass="rvo">
+	
+		Select ROWNUM, X.* FROM 
+		( select CART_ID, EAT_NAME, EAT_CONT, ORDER_QTY, ORDER_PRICE, TO_CHAR(ORDER_DATE, 'yyyy-mm-dd') as ORDER_DATE, MELONAGE, PAY_NO, ORDER_ST, MEM_NO, EAT_NO, order_no 
+		from request 
+		where mem_no = #mem_no#
+		order by ORDER_DATE desc ) X
+	
+	
+	
+	</select>
+	
+	<update id="updateOrder_st" parameterClass="rvo">
+		update request 
+		set order_st = '취소'
+		where order_no = #order_no# 
+	</update> 
+			
+	
+</sqlMap>			
+

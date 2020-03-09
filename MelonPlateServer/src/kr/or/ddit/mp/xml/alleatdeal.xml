@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="alleatdeal">
+
+	
+	<select id="alleatdeal.eatlistByMyzone" resultClass="eatVO" parameterClass="ZoneVO">
+	
+		select distinct b.eat_no,b.eat_name,
+		b.eat_cont1,b.eat_price,b.eat_qty,b.in_date,b.eat_approve,b.com_id,b.eat_cont2,b.eat_del
+		from eatdeal b,
+		(
+		select com_id,mem_no, com_name, com_addr,com_tel,
+		com_cat,com_key,com_opentime,com_closetime,
+		com_parking,com_menu,com_photo,com_foodprice
+		from com
+		where com_addr like '%' || #zone1# || '%'
+		or com_addr like '%' || #zone2# || '%'
+		or com_addr like '%' || #zone3# || '%'
+		) a
+		where a.com_id = b.com_id
+		and b.eat_approve ='Y'
+	
+	</select>
+	
+	<select id="alleatdeal.eatlistByQty" resultClass="eatVO" >
+	
+		select a.eat_no,a.eat_name,a.eat_cont1,a.eat_price,a.eat_qty,
+		a.in_date,a.eat_approve,a.com_id,a.eat_cont2,a.eat_del,sum(b.order_qty) as sum
+		from eatdeal a, request b
+        where b.eat_no = a.eat_no
+        and a.eat_approve ='Y'
+        group by a.eat_no, a.eat_name,a.eat_cont1,a.eat_price,a.eat_qty,a.in_date,
+        a.eat_approve,a.com_id,a.eat_cont2,a.eat_del
+        order by sum(b.order_qty) desc
+        
+	
+	</select>
+	
+	<select id="alleatdeal.zoneForlist" resultClass="ZoneVO" parameterClass="String">
+	
+	select zone1, zone2,zone3
+	from zone where mem_no = #String#
+	
+	</select>
+	
+	<select id="alleatdeal.eatlistByNew" resultClass="eatVO" >
+	
+		select	eat_no,
+				eat_name,
+				eat_cont1,
+				eat_cont2,
+				eat_price,
+				eat_qty,
+				to_char(in_date, 'yyyy-mm-dd') as in_date,
+				eat_approve, 
+				eat_del
+		from 	eatdeal
+		where 	eat_approve ='Y'
+		order by in_date desc
+	
+	</select>
+
+</sqlMap>			
+
+
+
+
+

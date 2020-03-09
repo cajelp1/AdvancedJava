@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="payeatdeal">
+
+	
+	<update id="payeatdeal.requestPayInsert" parameterClass="reVO">
+	<!-- 바로결제 시 카트 아이디가 0으로 세팅된다 -->
+		insert into request 
+		(order_no,cart_id,eat_name,eat_cont,
+		order_qty,order_price,order_date,melonage,
+		pay_no,order_st,mem_no,eat_no) 
+		values 
+		((select nvl(max(order_no),0)+1 from request),0,#eat_name#,#eat_cont#,
+		#order_qty#,#order_price#,sysdate,#melonage#,
+		(select nvl(max(pay_no),0)+1 from request),'확정',#mem_no#,#eat_no#)
+	
+	</update>
+	<update id="payeatdeal.requestCartInsert" parameterClass="reVO">
+	<!-- 바로결제 시 카트 아이디가 0으로 세팅된다 -->
+		insert into request 
+		(order_no,cart_id,eat_name,eat_cont,
+		order_qty,order_price,order_date,melonage,
+		pay_no,order_st,mem_no,eat_no) 
+		values 
+		((select nvl(max(order_no),0)+1 from request),#cart_id#,#eat_name#,#eat_cont#,
+		#order_qty#,#order_price#,sysdate,#melonage#,
+		(select nvl(max(pay_no),0)+1 from request),'확정',#mem_no#,#eat_no#)
+	
+	</update>
+	
+	<select id="payeatdeal.requestSelect" resultClass="reVO" parameterClass="String">
+		
+        select order_no,cart_id,eat_name,eat_cont,
+        order_qty,order_price,order_date,melonage,pay_no,order_st,eat_no
+        from request
+        where mem_no = #mem_no# 
+        order by order_no desc
+
+	</select>	
+	<update id="payeatdeal.payInsert" parameterClass="payVO">
+	
+		insert into pay 
+		(pay_no,order_no,pay_com,pay_price,pay_date) 
+		values 
+		((select nvl(max(pay_no),0)+1 from pay),#order_no#,#pay_com#,#pay_price#,sysdate)
+
+	</update>	
+	<update id="payeatdeal.mileNotuseInsert" parameterClass="mileVO">
+	<!-- 마일리지를 사용하지 않았을 때 -->
+		insert into mileage 
+		(mel_no,mem_no,order_no,melonage,mel_add,mel_indate) 
+		values 
+		((select nvl(max(mel_no),0)+1 from mileage),#mem_no#,#order_no#,
+			#melonage#,#mel_add#,sysdate)
+
+	</update>	
+	<update id="payeatdeal.mileUseInsert" parameterClass="mileVO">
+	<!-- 마일리지를 사용했을 때 -->
+	
+		insert into mileage 
+		(mel_no,mem_no,order_no,melonage,mel_use,mel_update) 
+		values 
+		((select nvl(max(mel_no),0)+1 from mileage),#mem_no#,#order_no#,
+			#melonage#,#mel_use#,sysdate)
+
+	</update>	
+	
+	<update id="payeatdeal.eatdealQtyDown" parameterClass="eatVO">
+		update eatdeal set eat_qty = #eat_qty# where eat_no = #eat_no#
+
+	</update>	
+</sqlMap>			
+
+
+
+
+

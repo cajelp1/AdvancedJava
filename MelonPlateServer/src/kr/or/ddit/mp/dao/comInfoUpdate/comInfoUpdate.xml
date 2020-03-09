@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+	<!-- 관리 페이지로 들어가기 위한 비밀 번호 입력 -->
+
+	<!-- pw가져오기 -->
+	<select id="getComPw" resultClass="comUp_memVO" parameterClass="comUp_memVO">
+		select
+		mem_pw
+		from member
+		where mem_no = #mem_no#
+		and mem_grade = '업체'
+
+	</select>
+
+	<!-- 관리 페이지에서 들어온 후 -->
+
+	<select id="getComDefaultInfo" resultClass="comUp_comVO"
+		parameterClass="comUp_comVO">
+
+		select com_name,com_addr,com_tel,com_cat,com_key,com_opentime,com_closetime,com_parking,com_menu,com_zipcode
+		from com
+		where
+		mem_no = #mem_no#
+		
+		
+
+
+
+	</select>
+
+
+	<!-- 우편번호 리스트 가져오기 -->
+
+	<select id="getComSearchZipCode" resultClass="comUp_ziptbVO" parameterClass="comUp_ziptbVO">
+
+		select
+		zipcode,sido,gugun,dong
+		from ziptb
+		where dong like '%'||#dong#||'%'
+
+	</select>
+
+
+	<!-- 회원 정보 수정 -->
+	
+	
+	<update id="updateCom" parameterClass="comUp_comVO">
+		update com set
+		com_menu = #com_menu# ,com_tel = #com_tel#,com_zipcode = #com_zipcode#,com_addr=#com_addr#,
+		com_cat=#com_cat#,com_key=#com_key#,com_opentime= #com_opentime#,com_closetime= #com_closetime#,
+		com_parking= #com_parking#
+		where mem_no = #mem_no#
+
+	</update>
+	
+	<!-- 업체 사진 넣기 -->
+	
+	<update id="updatePhoto" parameterClass="comUp_comVO">
+		update com set
+		com_photo = #com_photo#
+		where mem_no = #mem_no#
+	</update>
+
+</sqlMap>
+
+
+

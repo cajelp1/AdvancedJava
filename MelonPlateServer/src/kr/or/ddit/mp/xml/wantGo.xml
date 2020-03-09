@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="wantGo">
+
+	
+	<update id="wantGo.insertWantgo" parameterClass="wantVO">
+		
+		insert into wantgo 
+		 (wantgo_no, mem_no, com_name, com_addr, wantgo_indate, com_id )
+		values 
+		 ((select nvl(max(wantgo_no),0)+1 from wantgo), #mem_no#, #com_name#, #com_addr#, sysdate, #com_id#)
+	
+	</update>
+	
+	<update id="wantGo.deleteWantgo" parameterClass="wantVO">
+		
+		delete from wantgo where wantgo_no = #wantgo_no#
+	
+	</update>
+	
+	<select id="wantGo.selectWantgo" resultClass="wantVO" parameterClass="wantVO">
+		SELECT rownum, X.*
+  		FROM( select wantgo_no, com_name, com_addr, TO_CHAR(wantgo_indate, 'yyyy-mm-dd') as wantgo_indate ,com_id 
+				from wantgo
+				where mem_no = #mem_no#
+				order by wantgo_no desc ) X
+	
+	</select>
+	
+	<select id="wantGo.isEmptyWantgo" resultClass="Integer" parameterClass="wantVO">
+		
+		select count(com_name) as cnt
+		from wantgo
+		where mem_no = #mem_no#
+		and com_id = #com_id#
+	
+	</select>
+</sqlMap>			
+
+
+
+
+

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+	<!-- 관리 페이지로 들어가기 위한 비밀 번호 입력 -->
+
+	<!-- pw가져오기 -->
+	<select id="getMemPw" resultClass="memUp_memVO" parameterClass="memUp_memVO">
+		select
+		mem_pw
+		from member
+		where mem_no = #mem_no#
+
+	</select>
+
+	<!-- 관리 페이지에서 들어온 후 -->
+
+	<select id="getMemDefaultInfo" resultClass="memUp_memVO"
+		parameterClass="memUp_memVO">
+
+		select mem_id, mem_name,TO_CHAR(mem_birth, 'yyyy-mm-dd') as mem_birth,mem_hp,mem_nick,mem_zipcode,mem_addr
+		from member
+		where
+		mem_no = #mem_no#
+
+	</select>
+	
+
+	<!-- 닉네임 가져오기 -->
+	<select id="getNickCheck" resultClass="memUp_memVO"
+		parameterClass="String">
+
+		select mem_nick
+		from member
+		where mem_nick = #mem_nick#
+
+	</select>
+
+	<!-- 우편번호 리스트 가져오기 -->
+
+	<select id="getMemSearchZipCode" resultClass="memUp_ziptbVO" parameterClass="memUp_ziptbVO">
+
+		select
+		zipcode,sido,gugun,dong
+		from ziptb
+		where dong like '%'||#dong#||'%'
+
+	</select>
+
+	<!-- 회원 삭제(탈퇴) -->
+
+	<update id="deleteMember" parameterClass="memUp_memVO">
+
+		delete from member
+		where mem_no = #mem_no#
+
+	</update>
+
+	<!-- 회원 정보 수정 -->
+
+	<update id="updateMember" parameterClass="memUp_memVO">
+		update member set
+		mem_pw = #mem_pw# ,mem_nick = #mem_nick#,mem_hp=#mem_hp#,
+		mem_zipcode=#mem_zipcode#,mem_addr= #mem_addr#
+		where mem_no = #mem_no#
+
+	</update>
+
+
+</sqlMap>
+
+
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+	<!-- 전체 회원 정보 CRUD -->
+	<select id="getAddUsedMelonage" resultClass="mileageVO" parameterClass="mileageVO">
+		<!-- 사용내역 -->
+		select mileage.mel_no,mileage.mem_no, request.eat_name,mileage.mel_add,mileage.mel_use,request.order_price,mileage.mel_indate,mileage.mel_update
+		from mileage,request
+		where request.order_no = mileage.order_no
+    	and  mileage.mem_no = #mem_no# 
+		order by mel_no desc
+	</select>
+	
+	
+	<select id="getAllMelonage" resultClass="mileageVO" parameterClass="mileageVO">
+	
+		select melonage from mileage
+        where mem_no = #mem_no#
+        order by mel_no desc
+
+	</select>
+	
+
+
+</sqlMap>
+
+
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="comeatdeal">
+
+	
+	<select id="comeatdeal.comList" resultClass="eatVO" parameterClass="String">
+	
+		select eat_no,
+			eat_name,
+			eat_cont1,
+			eat_cont2,
+			eat_price,
+			eat_qty,
+			TO_CHAR(in_date, 'yyyy-mm-dd') as in_date,
+			eat_approve, eat_del
+		from eatdeal
+		where com_id = #com_id#
+		order by eat_no desc
+        
+	
+	</select>
+	
+	<update id="comeatdeal.addeat" parameterClass="eatVO">
+	
+		insert into eatdeal 
+		(eat_no, eat_name, eat_cont1, eat_cont2, eat_price, eat_qty, 
+		eat_approve, com_id, eat_del) 
+		values ((select nvl(max(eat_no),0)+1 from eatdeal), #eat_name#, 
+				#eat_cont1#, #eat_cont2#, #eat_price#, 
+				#eat_qty#, 'N',#com_id#, 'N')
+	
+	</update>
+	<update id="comeatdeal.deleat" parameterClass="eatVO">
+	
+		update eatdeal 
+			set eat_del = 'Y'
+			where eat_no = #eat_no#
+		
+	</update>
+
+</sqlMap>			
+
+
+
+
+

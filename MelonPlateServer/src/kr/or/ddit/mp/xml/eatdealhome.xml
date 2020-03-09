@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="eatdealhome">
+
+	
+	<select id="eatdealhome.selectEatdeal" resultClass="eatVO" parameterClass="String">
+		
+		select 
+		eat_name,
+		eat_cont1,
+		eat_price,
+		eat_qty,
+		to_char(in_date, 'yyyy-mm-dd') as in_date,
+		eat_approve,
+		com_id,
+		eat_cont2,
+		eat_del
+		from eatdeal where eat_no = #eat_no#
+		order by eat_no
+	
+	</select>
+	
+	<update id="eatdealhome.addcart" parameterClass="cartVO">
+	
+		insert into cart 
+		(cart_no, eat_no, cart_price, 
+		cart_qty, mem_no, in_date, eatdeal_name) 
+		values 
+		((select nvl(max(cart_no),0)+1 from cart), 
+		#eat_no#, #cart_price#, #cart_qty#, #mem_no#, sysdate, 
+		#eatdeal_name#)
+
+	</update>	
+	
+
+	<select id="eatdealhome.viewMil" resultClass="mileVO" parameterClass="String">
+		
+		select mel_no,
+		order_no,
+		melonage,
+		mel_use,
+		mel_add,
+		mel_update,
+		mel_indate
+		from mileage where mem_no = #mem_no#
+		order by mel_no desc
+
+	</select>	
+</sqlMap>			
+
+
+
+
+

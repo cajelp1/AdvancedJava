@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+	<!-- 내 eatDealQa 출력 -->
+	<select id="getMyEatDealQnA" resultClass="eatqaVO"
+		parameterClass="eatqaVO">
+
+		select rownum
+		,
+		a.eatqa_no,eat_no,eatqa_title,in_date,eatqa_cont,eatqa_com,eatqa_com_st,up_date,mem_no
+		from eatqa a
+		where mem_no = #mem_no#
+
+
+	</select>
+
+
+
+
+</sqlMap>
+
+
+

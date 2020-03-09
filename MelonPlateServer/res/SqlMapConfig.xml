@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+<!-- 내가 한 것 -->
+	<properties resource="SqlMapConfig.properties" />
+	
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" maxRequests="32" maxSessions="10"
+		maxTransactions="5" useStatementNamespaces="false" />
+	
+	<!-- xml파일 넣고 작성하세요 -->
+	<!-- 은혜 -->
+
+	<typeAlias alias="comVO" 		type="kr.or.ddit.mp.vo.member.ComVO"/>
+	<typeAlias alias="wantVO" 		type="kr.or.ddit.mp.vo.mypage.WantgoVO"/>
+	<typeAlias alias="eatVO" 		type="kr.or.ddit.mp.vo.eatdeal.EatdealVO"/>
+	<typeAlias alias="eatqnaVO" 	type="kr.or.ddit.mp.vo.eatdeal.EatqaVO"/>
+	<typeAlias alias="salesVO" 		type="kr.or.ddit.mp.vo.eatdeal.SalesVO"/>
+	<typeAlias alias="cartVO" 		type="kr.or.ddit.mp.vo.eatdeal.CartVO"/>
+	<typeAlias alias="mileVO" 		type="kr.or.ddit.mp.vo.mypage.MileageVO"/>
+	<typeAlias alias="reVO" 		type="kr.or.ddit.mp.vo.eatdeal.RequestVO"/>
+	<typeAlias alias="payVO" 		type="kr.or.ddit.mp.vo.eatdeal.PayVO"/>
+	<typeAlias alias="memVO" 		type="kr.or.ddit.mp.vo.member.MemberVO"/>
+	
+	
+	<!-- 혜영 -->
+	<typeAlias alias="ReviewVO"			type="kr.or.ddit.mp.vo.review.ReviewVO" />
+	<typeAlias alias="ReservationVO"	type="kr.or.ddit.mp.vo.reservation.ReservationVO" />
+	<typeAlias alias="ReserOptionVO"	type="kr.or.ddit.mp.vo.reservation.ReserOptionVO" />
+	<typeAlias alias="ZiptbVO"         	type="kr.or.ddit.mp.vo.mypage.ZiptbVO" />
+   	<typeAlias alias="ZoneVO"         	type="kr.or.ddit.mp.vo.mypage.ZoneVO" />
+	<typeAlias alias="zipcodeVO" 		type="kr.or.ddit.mp.vo.zipcode.ZipcodeVO" />
+	<typeAlias alias="readycomVO" 		type="kr.or.ddit.mp.vo.member.ReadyComVO" />
+	
+	<!--  SqlMapConfig_Admin -->
+	<!-- admin_ 추가 -->
+	<typeAlias alias="admin_memVO" 		type="kr.or.ddit.mp.vo.admin.MemberVO"/>
+	<typeAlias alias="admin_blackVO" 	type="kr.or.ddit.mp.vo.admin.BlackVO"/>
+	<typeAlias alias="admin_comVO" 		type="kr.or.ddit.mp.vo.admin.ComVO"/>
+	<typeAlias alias="admin_holicVO" 	type="kr.or.ddit.mp.vo.admin.HolicVO"/>
+	<typeAlias alias="admin_readycomVO" type="kr.or.ddit.mp.vo.admin.ReadyComVO"/>	
+	
+	<!--  SqlMapConfig_buylist -->
+	<typeAlias alias="rvo" 				type="kr.or.ddit.mp.vo.buylist.RequestVO"/>
+	
+	<!--  SqlMapConfig_cart -->
+	<!-- 앞에 cart_ 추가 -->
+	<typeAlias alias="cart_cvo" type="kr.or.ddit.mp.vo.cart.CartVO"/>
+	<typeAlias alias="cart_milevo" type="kr.or.ddit.mp.vo.cart.MileageVO"/>
+	<typeAlias alias="cart_eatvo" type="kr.or.ddit.mp.vo.cart.EatdealVO"/>
+	<typeAlias alias="cart_revo" type="kr.or.ddit.mp.vo.cart.RequestVO"/>
+	<typeAlias alias="cart_pvo" type="kr.or.ddit.mp.vo.cart.PayVO"/>
+	
+	<!--  SqlMapConfig_ComInfoUpdate -->
+	<!-- 앞에 comUp_ 추가 -->
+	<typeAlias alias="comUp_comVO" type="kr.or.ddit.mp.vo.comInfoUpdate.ComVO"/>
+	<typeAlias alias="comUp_memVO" type="kr.or.ddit.mp.vo.comInfoUpdate.MemberVO"/>
+	<typeAlias alias="comUp_ziptbVO" type="kr.or.ddit.mp.vo.comInfoUpdate.ZiptbVO"/>
+	
+	<!--  SqlMapConfig_join -->
+	<!-- 삭제 -->
+<!-- 	<typeAlias alias="MemberVO" type="kr/or/ddit/mp/vo/member/MemberVO" /> -->
+	<!--  SqlMapConfig_login -->
+	<!-- 삭제 -->
+<!-- 	<typeAlias alias="MemberVO"		type="kr/or/ddit/mp/vo/member/MemberVO" /> -->
+
+	<!--  SqlMapConfig_matzip -->
+	<!-- matzip_추가 -->
+	<typeAlias alias="matzip_reviewVO" type="kr.or.ddit.mp.vo.matZip.ReviewVO"/>
+	
+	<!--  SqlMapConfig_melonageCheck -->
+	<typeAlias alias="mileageVO" type="kr.or.ddit.mp.vo.melonageCheck.MileageVO"/>
+	<typeAlias alias="requestVO" type="kr.or.ddit.mp.vo.melonageCheck.RequestVO"/>
+	
+	<!--  SqlMapConfig_memInfoUpdate -->
+	<!-- 앞에 memUp_ 추가 -->
+	<typeAlias alias="memUp_memVO" type="kr.or.ddit.mp.vo.memInfoUpdate.MemberVO"/>
+	<typeAlias alias="memUp_ziptbVO" type="kr.or.ddit.mp.vo.memInfoUpdate.ZiptbVO"/>
+	
+	<!--  SqlMapConfig_MypageEatDealQnA -->
+	<typeAlias alias="eatqaVO" type="kr.or.ddit.mp.vo.mypageEatDealQnA.EatqaVO"/>
+	
+	<!--  SqlMapConfig_Recog -->
+	<typeAlias alias="evo" type="kr.or.ddit.mp.vo.recogeatdeal.EatdealVO"/>
+	
+	
+	<transactionManager type="JDBC">
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver" value="${driver}" />
+			<property name="JDBC.ConnectionURL" value="${url}" />
+			<property name="JDBC.Username" value="${username}" />
+			<property name="JDBC.Password" value="${password}" />
+		</dataSource>
+	</transactionManager>
+	
+	<!-- xml파일 넣고 작성하세요 -->
+	
+	<!-- 은혜 -->
+
+	<sqlMap resource="kr/or/ddit/mp/xml/goodCom.xml"/>
+	<sqlMap resource="kr/or/ddit/mp/xml/wantGo.xml"/>
+	<sqlMap resource="kr/or/ddit/mp/xml/searchGoodcom.xml"/>
+	<sqlMap resource="kr/or/ddit/mp/xml/comEatdeal.xml"/>
+	<sqlMap resource="kr/or/ddit/mp/xml/qnacomEatdeal.xml"/>
+	<sqlMap resource="kr/or/ddit/mp/xml/salescom.xml"/>
+	<sqlMap resource="kr/or/ddit/mp/xml/eatdealhome.xml"/>
+	<sqlMap resource="kr/or/ddit/mp/xml/payeatdeal.xml"/>
+	<sqlMap resource="kr/or/ddit/mp/xml/home.xml"/>
+	<sqlMap resource="kr/or/ddit/mp/xml/alleatdeal.xml"/>
+	
+	<!-- 혜영 -->	
+	<sqlMap resource="kr/or/ddit/mp/xml/review/review.xml" />
+	<sqlMap resource="kr/or/ddit/mp/xml/reservation/reservation.xml" />
+	<sqlMap resource="kr/or/ddit/mp/xml/reservation/reservation_option.xml" />
+	<sqlMap resource="kr/or/ddit/mp/xml/mypage/zone.xml" />
+	<sqlMap resource="kr/or/ddit/mp/xml/eatdealQA/eatdealQA.xml" /> <!-- 은혜가 추가해줌 -->
+	<sqlMap resource="kr/or/ddit/mp/xml/comjoin.xml"/>
+	
+	<!--  SqlMapConfig_Admin -->
+	<sqlMap resource="kr/or/ddit/mp/dao/admin/member.xml"/>
+	<!--  SqlMapConfig_buylist -->
+	<sqlMap resource="kr/or/ddit/mp/xml/buylist.xml"/>
+	<!--  SqlMapConfig_cart -->
+
+	<sqlMap resource="kr/or/ddit/mp/xml/mycart.xml"/>
+	<!--  SqlMapConfig_ComInfoUpdate -->
+	<sqlMap resource="kr/or/ddit/mp/dao/comInfoUpdate/comInfoUpdate.xml"/>
+	<!--  SqlMapConfig_join -->
+	<sqlMap resource="kr/or/ddit/mp/xml/join.xml"/>
+	<!--  SqlMapConfig_login -->
+	<sqlMap resource="kr/or/ddit/mp/dao/login/Login.xml"></sqlMap>
+	
+	<!--  SqlMapConfig_matzip -->
+	<sqlMap resource="kr/or/ddit/mp/dao/matZip/matZip.xml"/>
+	<!--  SqlMapConfig_melonageCheck -->
+	<sqlMap resource="kr/or/ddit/mp/dao/melonageCheck/melonageCheck.xml"/>
+	<!--  SqlMapConfig_memInfoUpdate -->
+	<sqlMap resource="kr/or/ddit/mp/dao/memInfoUpdate/memInfoUpdate.xml"/>
+	<!--  SqlMapConfig_MypageEatDealQnA -->
+	<sqlMap resource="kr/or/ddit/mp/dao/mypageEatDealQnA/mypageEatDealQnA.xml"/>
+	<!--  SqlMapConfig_Recog -->
+	<sqlMap resource="kr/or/ddit/mp/xml/Recog.xml"/>
+	
+</sqlMapConfig>
+
+
+
+
+
+

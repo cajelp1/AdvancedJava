@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="qnacomeatdeal">
+
+	
+	<select id="qnacomeatdeal.qnaAllList" resultClass="eatqnaVO" parameterClass="String">
+	
+		select 
+		a.eatqa_no,
+		a.eat_no,
+		a.eatqa_title,
+		TO_CHAR(a.in_date, 'yyyy-mm-dd') as in_date,
+		a.eatqa_cont,
+		a.eatqa_com,
+		a.eatqa_com_st,
+		TO_CHAR(a.up_date, 'yyyy-mm-dd') as up_date,
+		b.eat_name
+		from eatqa a, eatdeal b
+		where a.eat_no = b.eat_no
+		and b.com_id = #string#
+		order by a.eatqa_no desc
+		
+	</select>
+	
+	<select id="qnacomeatdeal.qnaNotList" resultClass="eatqnaVO" parameterClass="String">
+	
+		select 
+		a.eatqa_no,
+		a.eat_no,
+		a.eatqa_title,
+		TO_CHAR(a.in_date, 'yyyy-mm-dd') as in_date,
+		a.eatqa_cont,
+		a.eatqa_com,
+		a.eatqa_com_st,
+		TO_CHAR(a.up_date, 'yyyy-mm-dd') as up_date,
+		b.eat_name
+		from eatqa a, eatdeal b
+		where a.eat_no = b.eat_no
+		and b.com_id = #string#
+        and a.eatqa_com_st = 'N'
+		order by a.eatqa_no desc
+	</select>
+			 
+
+	
+	<update id="qnacomeatdeal.ansQna" parameterClass="eatqnaVO">
+	
+		update eatqa
+		set eatqa_com =  #eatqa_com#, 
+		eatqa_com_st = 'Y', 
+		up_date = sysdate
+		where eatqa_no = #eatqa_no#
+	
+	</update>
+<!-- 	<update id="comeatdeal.deleat" parameterClass="eatVO"> -->
+	
+<!-- 		update eatdeal  -->
+<!-- 			set eat_del = 'Y' -->
+<!-- 			where eat_no = #eat_no# -->
+		
+<!-- 	</update> -->
+
+</sqlMap>			
+
+
+
+
+

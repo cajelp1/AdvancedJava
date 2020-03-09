@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="mycart">
+
+	<select id="getAllEatList" resultClass="evo">
+	
+		select eatdeal.EAT_NO, eatdeal.EAT_NAME, eatdeal.EAT_CONT1, eatdeal.EAT_PRICE, eatdeal.EAT_QTY, eatdeal.IN_DATE, eatdeal.EAT_APPROVE, eatdeal.COM_ID, eatdeal.EAT_CONT2, eatdeal.EAT_DEL, com.com_name 
+		from eatdeal, com where eat_del = 'N' and com.com_id = eatdeal.com_id
+		order by eatdeal.IN_DATE desc
+
+	</select>
+	
+	<update id="updateOnY" parameterClass="evo">
+		update eatdeal 
+		set eat_approve = 'Y',
+		in_date = sysdate
+		where eat_no = #eat_no# 
+	</update>
+	
+	<update id="updateOnB" parameterClass="evo">
+		update eatdeal 
+		set eat_approve = 'B',
+		in_date = sysdate
+		where eat_no = #eat_no# 
+	</update>
+	
+</sqlMap>			
+

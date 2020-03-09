@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+	<!-- 전체 회원 정보 CRUD -->
+	<select id="getAllMemberCom" resultClass="admin_memVO">
+
+		select
+		member.mem_grade,member.mem_name,member.mem_hp,member.melonage,com.com_name,member.mem_no
+		from member
+		left join com
+		on member.mem_no=com.mem_no
+		order by
+		member.mem_grade
+
+	</select>
+
+	<update id="deleteMemberAdmin" parameterClass="admin_memVO">
+
+		delete from member
+		where mem_no = #mem_no#
+
+	</update>
+
+	<!-- 관리자 추가 -->
+	<update id="insertAdmin" parameterClass="admin_memVO">
+
+		insert into member
+		(mem_no, mem_id,mem_name,mem_pw, mem_grade)
+		values (
+		(select NVL(MAX(mem_no),0)+1 from member),#mem_id#, #mem_name#
+		,#mem_pw# , '관리자')
+
+
+	</update>
+
+
+	<!-- 일반 회원 정보 CRUD -->
+
+	<select id="getAllMember" resultClass="admin_memVO">
+
+		select mem_grade,mem_name,mem_hp,melonage
+		from member
+		where mem_grade = '일반'
+
+	</select>
+
+	<!-- 업체 회원 정보 CRUD -->
+
+	<select id="getAllCom" resultClass="admin_memVO">
+
+		select member.mem_no,member.mem_grade,member.mem_name,member.mem_hp,com.com_name
+		from member,com
+        where member.mem_no= com.mem_no
+
+	</select>
+	<select id="getReadyCom" resultClass="admin_readycomVO">
+
+		 select mem_no,com_name,mem_name,com_id,com_tel,com_addr,com_cat from readycom
+
+	</select>
+
+
+	<!-- 업체회원 가입 신청 승인/반려 승인 -->
+	<update id="insertJoinCom1" parameterClass="admin_readycomVO">
+
+		insert into
+		member(mem_id,mem_no,mem_pw,mem_name,mem_nick,mem_birth,mem_hp,mem_addr,mem_email,melonage,mem_grade,mem_zipcode)
+		select
+		mem_id,mem_no,mem_pw,mem_name,mem_nick,mem_birth,mem_hp,mem_addr,mem_email,melonage,mem_grade,mem_zipcode
+		from readycom
+		 where mem_no=#mem_no# 
+		
+	
+	
+	
+
+	</update>
+
+	<update id="insertJoinCom2" parameterClass="admin_readycomVO">
+
+		insert into com
+		(com_id,mem_no,com_name,com_addr,com_photo,com_tel,com_cat,com_key,com_opentime,com_closetime,com_parking,com_menu,com_foodprice,com_zipcode)
+		select
+		com_id,mem_no,com_name,com_addr,com_photo,com_tel,com_cat,com_key,com_opentime,com_closetime,com_parking,com_menu,com_foodprice,com_zipcode
+		from readycom
+		where mem_no=#mem_no#
+
+
+
+	</update>
+
+	<!-- 반려 -->
+	<update id="deleteJoinCom" parameterClass="admin_readycomVO">
+
+		delete from readycom
+		where mem_no = #mem_no#
+
+	</update>
+
+	<!-- 일반회원 블랙리스트 CRUD -->
+
+	<select id="getReadyBlackMember" resultClass="admin_memVO">
+		
+	select
+		member.mem_no,member.mem_name,member.mem_id,member.mem_hp,count(reservation.no_show) as no_show
+		from member,reservation
+		where member.mem_no=reservation.mem_no
+		and reservation.no_show ='Y'
+        group by member.mem_no,member.mem_name,member.mem_id,member.mem_hp
+       HAVING count(reservation.no_show)>2
+            
+     minus   
+     select
+		member.mem_no,member.mem_name,member.mem_id,member.mem_hp,count(reservation.no_show) as no_show
+		from member,reservation,black
+		where member.mem_no=reservation.mem_no
+        and member.mem_no=black.mem_no
+        and reservation.no_show ='Y'
+        group by member.mem_no,member.mem_name,member.mem_id,member.mem_hp
+	
+	
+		<!-- select
+		member.mem_no,member.mem_name,member.mem_id,member.mem_hp,reservation.no_show
+		from member,reservation
+		where member.mem_no=reservation.mem_no
+		and reservation.no_show>2
+     minus   
+     select
+		member.mem_no,member.mem_name,member.mem_id,member.mem_hp,reservation.no_show
+		from member,reservation,black
+		where member.mem_no=reservation.mem_no
+        and member.mem_no=black.mem_no
+		
+ -->
+	</select>
+
+	<select id="getAllBlackMember" resultClass="admin_memVO">
+	
+		   select
+		member.mem_no,member.mem_name,member.mem_id,member.mem_hp,count(reservation.no_show)as no_show
+		from member,reservation,black
+		where member.mem_no=reservation.mem_no
+        and member.mem_no=black.mem_no
+		and reservation.no_show ='Y'
+        group by member.mem_no,member.mem_name,member.mem_id,member.mem_hp
+       HAVING count(reservation.no_show)>2
+	
+
+		<!-- select
+		member.mem_no,member.mem_name,member.mem_id,member.mem_hp,reservation.no_show as no_show
+		from member,reservation,black
+		where member.mem_no=reservation.mem_no
+        and member.mem_no=black.mem_no
+		and reservation.no_show>2 -->
+
+	</select>
+
+	<update id="insertBlackMember" parameterClass="admin_memVO">
+
+		insert into black
+		( mem_no, black_indate)
+
+		values (#mem_no#, sysdate)
+
+	</update>
+
+	<update id="deleteBlackMember" parameterClass="admin_memVO">
+
+		delete from black
+		where mem_no = #mem_no#
+
+	</update>
+
+	<!-- 일반회원 홀릭 회원 CRUD -->
+	<!-- 조회 조건 : 리뷰 30 개 이상, 추천30개 이상 -->
+
+	<select id="getReadyHolicMember" resultClass="admin_memVO">
+
+		select member.mem_no,member.mem_name, member.mem_nick, member.mem_hp,
+		melonage, count(member.mem_no) as count_review ,sum(review.re_up) as
+		sum_reUp
+		from member, review
+		where review.mem_no = member.mem_no
+		group by member.mem_no,member.mem_name, member.mem_nick, member.mem_hp,
+		melonage
+		having count(member.mem_no)>29<!-- 리뷰수 조건 -->
+		and sum(review.re_up)>29<!-- 추천 갯수 조건 -->
+		minus
+		select member.mem_no,member.mem_name, member.mem_nick, member.mem_hp,
+		melonage, count(member.mem_no) as count_review ,sum(review.re_up) as
+		sum_reUp
+		from member, review, holic
+		where review.mem_no = member.mem_no
+		and holic.mem_no = member.mem_no
+		group by member.mem_no,member.mem_name, member.mem_nick, member.mem_hp,
+		melonage
+		
+		<!-- having count(member.mem_no)>0
+		and sum(review.re_up)>0 -->
+
+	</select>
+
+	<select id="getAllHolicMember" resultClass="admin_memVO">
+
+		<!-- 조건에 만족 하고 홀릭인 회원(getReadyHolicMember와 컬럼 동일) -->
+		select member.mem_no,member.mem_name, member.mem_nick, member.mem_hp, 
+			melonage, count(member.mem_no) as count_review ,sum(review.re_up) as sum_reUp 
+			from member, review, holic 
+			where review.mem_no = member.mem_no 
+			and holic.mem_no= member.mem_no 
+			group by member.mem_no,member.mem_name, member.mem_nick, 
+			member.mem_hp, melonage 
+			having count(member.mem_no)>29 <!-- 리뷰수 조건 -->
+			and sum(review.re_up)>29 <!-- 추천 갯수 조건 -->
+
+
+	</select>
+
+	<update id="insertHolicMember" parameterClass="admin_memVO">
+
+		 insert into holic(mem_no, up_qty,re_qty,hol_date) values(#mem_no#,
+		(select sum(review.re_up)
+		from member, review
+		where review.mem_no = member.mem_no
+        and  member.mem_no = #mem_no#
+		),(select count(member.mem_no) as count_review
+		from member, review
+		where review.mem_no = member.mem_no
+         and  member.mem_no = #mem_no#
+		),sysdate)
+		
+	</update>
+
+
+	<update id="deleteHolicMember" parameterClass="admin_memVO">
+
+		delete from holic
+		where mem_no = #mem_no#
+	</update>
+
+	<!-- 업체회원 우수 맛집리스트 CRUD /최근 한달이내 /검색 조건/ 리뷰 평점 : 3*0.8 = 2.4 이상, 리뷰수 :20 개 이상 -->
+	<select id="getAllGoodCom" resultClass="admin_memVO">
+
+		select com.com_name,member.mem_name,
+		com.com_id, member.mem_hp, com.com_tel
+		from
+		com,review,member
+		where com.com_id=review.com_id
+		and member.mem_no = com.mem_no
+		and
+		re_date>=to_date(add_months(sysdate,-1))
+		group by member.mem_name, com.com_id, com.com_name, member.mem_hp,
+		com.com_tel
+		having
+		avg(review.RE_SCORE) > 2.3 <!-- 리뷰 평점 조건 -->
+		and count(review.re_no)> 19 <!-- 리뷰 갯수 조건 -->
+
+	</select>
+
+
+
+
+</sqlMap>
+
+
+

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="reservation">
+
+	<!--1.예약내역 전체 조회-->
+	<select id="selectReserList" resultClass="ReservationVO" parameterClass="String">
+	 	SELECT a.res_no, a.com_id, a.res_person, a.res_date, a.res_st, a.no_show, b.mem_name, b.mem_hp
+    	  FROM reservation a, member b
+    	 	WHERE com_id = #com_id#
+        	  AND a.mem_no = b.mem_no
+        	  ORDER BY a.res_date desc
+	</select>
+	
+	<!--2.예약내역 승인 조회-->
+	<select id="selectReserApprove" resultClass="ReservationVO" parameterClass="String">
+	 	SELECT a.res_no, a.com_id, a.res_person, a.res_date, a.res_st, a.no_show, b.mem_name, b.mem_hp
+    	  FROM reservation a, member b
+    	 	WHERE com_id = #com_id#
+        	  AND a.mem_no = b.mem_no
+        	  AND a.res_st = '승인'
+	</select>	
+	  
+	<!--3.예약내역 대기 조회-->
+	<select id="selectReserWait" resultClass="ReservationVO" parameterClass="String">
+	 	SELECT a.res_no, a.com_id, a.res_person, a.res_date, a.res_st, a.no_show, b.mem_name, b.mem_hp
+    	  FROM reservation a, member b
+    	 	WHERE com_id = #com_id#
+        	  AND a.mem_no = b.mem_no
+        	  AND a.res_st = '대기'
+	</select>
+	
+	<!--4.예약내역 반려 조회-->
+	<select id="selectReserBack" resultClass="ReservationVO" parameterClass="String">
+	 	SELECT a.res_no, a.com_id, a.res_person, a.res_date, a.res_st, a.no_show, b.mem_name, b.mem_hp
+    	  FROM reservation a, member b
+    	 	WHERE com_id = #com_id#
+        	  AND a.mem_no = b.mem_no
+        	  AND a.res_st = '반려'
+	</select>
+	
+	<!--5.예약내역 노쇼 조회-->
+	<select id="selectReserNoshow" resultClass="ReservationVO" parameterClass="String">
+	 	SELECT a.res_no, a.com_id, a.res_person, a.res_date, a.res_st, a.no_show, b.mem_name, b.mem_hp
+    	  FROM reservation a, member b
+    	 	WHERE com_id = #com_id#
+        	  AND a.mem_no = b.mem_no
+        	  AND a.res_st = '노쇼'
+	</select>
+	
+	<!--6. 예약 승인하기 -->
+	<update id="approveReservation" parameterClass="ReservationVO">
+		UPDATE reservation
+		   SET res_st = '승인'
+	     WHERE res_st = '대기'
+           AND res_no = #res_no#
+    </update>
+    
+    <!--7. 예약 반려하기 -->
+	<update id="backReservation" parameterClass="ReservationVO">
+		UPDATE reservation
+		   SET res_st = '반려'
+	     WHERE res_st = '대기'
+           AND res_no = #res_no#
+    </update>
+    
+    <!--8. 예약 노쇼하기 -->
+	<update id="noshowReservation" parameterClass="ReservationVO">
+		UPDATE reservation
+		   SET res_st = '노쇼', no_show='Y'
+	     WHERE res_st = '승인'
+           AND res_no = #res_no#
+    </update>
+    
+    <!--9. 예약하기 -->
+    <insert id="insertReservation" parameterClass="ReservationVO">
+		INSERT INTO reservation (res_no, com_id, res_person, res_date, res_time, res_st, no_show, mem_no, mem_name)
+  		     VALUES(#res_no#, #com_id#, #res_person#, #res_date#,  #res_time# , '대기', '0', #mem_no#, #mem_name#)   
+	</insert>
+	
+	<!--10.회원이 예약내역 조회-->
+	<select id="selectMyReservation" resultClass="ReservationVO" parameterClass="String">
+	 	SELECT b.mem_nick, a.res_no, c.com_name, b.mem_name, a.res_person, a.res_date, a.res_time, a.res_st
+		    FROM reservation a, member b, com c
+		    WHERE a.mem_no = b.mem_no
+		      AND a.com_id = c.com_id
+		      AND b.mem_no = #mem_no#
+		     ORDER BY a.res_date desc
+	</select>
+	
+	<!--11. 예약 강제 삭제 -->
+	<update id="deleteReservation" parameterClass="ReservationVO">
+		DELETE FROM reservation 
+        WHERE res_no = #res_no# 
+          AND mem_no = #mem_no#
+    </update>
+    
+    <!--12. 업체회원 오픈시간, 마감시간 조회하기-->
+	<select id="chiceComResOption" resultClass="comVO" parameterClass="String">
+	 	SELECT com_id, com_opentime, com_closetime 
+		    FROM com
+		    WHERE com_id = #com_id#
+	</select>
+</sqlMap>

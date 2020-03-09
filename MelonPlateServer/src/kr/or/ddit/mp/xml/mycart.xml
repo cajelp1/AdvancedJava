@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="mycart">
+	<!-- cart_id
+	eat_no
+	cart_price
+	cart_qty
+	mem_no
+	in_date
+	 -->
+	
+	<update id="insertCart" parameterClass="cart_cvo">
+		insert into cart ( cart_no, eat_no, eatdeal_name, cart_price, cart_qty, mem_no, in_date)  
+			values ( (SELECT NVL(MAX(cart_no),0)+1 FROM cart), #eat_no#,#eatdeal_name#, (SELECT eat_price FROM EATDEAL where eat_no=#eat_no#), #cart_qty#, #mem_no#,sysdate)
+
+	</update>
+	
+	<delete id="deleteCart" parameterClass="cart_cvo"> 
+	
+		delete from cart where cart_no = #cart_no#
+		
+	</delete>
+	
+	
+	<select id="getAllCartList" resultClass="cart_cvo">
+	
+		SELECT ROWNUM, X.* FROM 
+		( select CART_NO, EAT_NO, CART_PRICE, CART_QTY, MEM_NO, TO_CHAR(in_date, 'yyyy-mm-dd') as in_date, EATDEAL_NAME
+		 from cart 
+		 where mem_no = #mem_no#
+		 order by in_date desc ) X
+
+		
+		
+	</select>
+	
+	<select id="getEatdealName" resultClass="cart_cvo">
+	
+		select DISTINCT eat_name from EATDEAL, cart where EATDEAL.eat_no = cart.eat_no and EAT_APPROVE = y
+	
+	</select>
+
+	<select id="getMileage" resultClass="cart_milevo">  
+
+		select melonage from mileage where mem_no = #mem_no#
+		order by MEL_NO DESC
+	
+	</select>
+	
+	<select id="getEatdealprice" resultClass="cart_cvo">
+	
+		select DISTINCT eat_price as cart_price from EATDEAL, cart where EATDEAL.eat_no = cart.eat_no 
+	
+	</select>
+	
+	<select id="requestSelect" resultClass="cart_revo" parameterClass="String">
+		
+        select order_no,cart_id,eat_name,eat_cont,
+        order_qty,order_price,order_date,melonage,pay_no,order_st,eat_no
+        from request
+        where mem_no = #mem_no# 
+        order by order_no desc
+
+	</select>
+	
+	<select id="getEatdealInfo" resultClass="cart_eatvo" parameterClass="cart_cvo">
+	
+		select * from EATDEAL where eat_name = #eatdeal_name# and EAT_APPROVE = 'Y'
+	
+	</select>
+	
+	<update id="requestPayInsert" parameterClass="cart_revo">
+	
+		insert into request 
+		(order_no, cart_id, eat_name, eat_cont, order_qty, order_price, order_date, melonage, pay_no, order_st, mem_no, eat_no) 
+		values 
+		((select nvl(max(order_no),0)+1 from request),#cart_id#, #eat_name#, #eat_cont#,
+		#order_qty#, #order_price#, sysdate, #melonage#,
+		(select nvl(max(pay_no),0)+1 from request),'확정',#mem_no#,#eat_no#)
+	
+	</update>
+	
+	<update id="payInsert" parameterClass="cart_pvo">
+	
+		insert into pay 
+		(pay_no,order_no,pay_com,pay_price,pay_date) 
+		values 
+		((select nvl(max(pay_no),0)+1 from pay),#order_no#,#pay_com#,#pay_price#,sysdate)
+
+	</update>
+	
+	<update id="mileUseInsert" parameterClass="cart_milevo">
+	<!-- 마일리지를 사용했을 때 -->
+	
+		insert into mileage 
+		(mel_no, mem_no, order_no, melonage, mel_use, mel_update) 
+		values 
+		((select nvl(max(mel_no),0)+1 from mileage), #mem_no#, #order_no#,
+			#melonage#, #mel_use#, sysdate)
+
+	</update>
+	
+	<update id="mileNotuseInsert" parameterClass="cart_milevo">
+	<!-- 마일리지를 사용하지 않았을 때 -->
+		
+		insert into mileage 
+		(mel_no,mem_no,order_no,melonage,mel_add,mel_indate) 
+		values 
+		((select nvl(max(mel_no),0)+1 from mileage),#mem_no#,#order_no#,
+			#melonage#,#mel_add#,sysdate)
+
+	</update>	
+	
+	<update id="eatdealQtyDown" parameterClass="cart_eatvo">
+	<!-- 결제 완료 후 결제한 수량만큼 eat딜 판매수량에서 감소 -->
+		update eatdeal set eat_qty = #eat_qty# where eat_no = #eat_no#
+
+	</update>
+	
+</sqlMap>			
+

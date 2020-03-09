@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="reserOption">
+
+	<!--1.예약 옵션 설정-->
+	<!-- datepicker 출력 문자 형태 확인!! -->
+	<insert id="insertReserOption" parameterClass="ReserOptionVO">
+		INSERT INTO reser_option(com_id, op_person, op_time, cl_time, op_breakday, etc_option) 
+      		 VALUES (#com_id#, #op_person#, #op_time#, #cl_time#, #op_breakday#, #etc_option#)   
+	</insert>
+	
+	<!--2.예약옵션 조회-->
+	<select id="selectComOption" resultClass="ReserOptionVO" parameterClass="String">
+	 	SELECT com_id, op_person, op_time, cl_time, op_breakday, etc_option 
+	 	  FROM reser_option
+   		 WHERE com_id = #com_id#
+	</select>
+
+	<!--3.초기예약옵션 조회-->
+	<select id="selectComFirstOption" resultClass="ComVO" parameterClass="String">
+	 	SELECT com_id, com_name, com_opentime, com_closetime
+          FROM com
+         WHERE com_id = #com_id#
+	</select>
+
+</sqlMap>

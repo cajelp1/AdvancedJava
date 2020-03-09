@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="join">
+
+    
+    <select id="join.idSearch" resultClass="kr.or.ddit.mp.vo.member.MemberVO" parameterClass="kr.or.ddit.mp.vo.member.MemberVO">
+    
+    	select mem_id from member where mem_id = #mem_id#
+    	
+    </select>
+    
+    <select id="join.nickSearch" resultClass="kr.or.ddit.mp.vo.member.MemberVO" parameterClass="kr.or.ddit.mp.vo.member.MemberVO">
+    
+    	select mem_nick from member where mem_nick = #mem_nick#
+    	
+    </select>
+    
+    <select id="join.zipSearch" resultClass="kr.or.ddit.mp.vo.zipcode.ZipcodeVO" parameterClass="kr.or.ddit.mp.vo.zipcode.ZipcodeVO">
+    	select zipcode, sido, gugun, dong from ziptb where dong like '%'||#dong#||'%' 
+    </select>
+    
+     <insert id="join.insertMember" parameterClass="kr.or.ddit.mp.vo.member.MemberVO">
+       
+       insert into member (mem_id, mem_no, mem_pw, mem_name, mem_nick, mem_birth, mem_email, mem_hp, mem_zipcode, mem_addr, melonage, mem_grade)
+                values (#mem_id#, (select nvl(max(mem_no + 1), 1) FROM member), #mem_pw#, #mem_name#, #mem_nick#, to_date(#mem_birth# , 'yy-mm-dd'), #mem_id#, #mem_hp#, #mem_zipcode#, #mem_addr#, '0', '일반')
+    </insert>
+    
+    
+    
+</sqlMap>
+
+
+<!--    mem_id -->
+<!-- 	mem_no -->
+<!-- 	mem_pw -->
+<!-- 	mem_name -->
+<!-- 	mem_nick -->
+<!-- 	mem_birth -->
+<!-- 	mem_mail -->
+<!-- 	mem_hp -->
+<!-- 	mem_addr -->
+<!-- 	melonage -->
+<!-- 	mem_grade -->
+<!-- mem_zipcode -->

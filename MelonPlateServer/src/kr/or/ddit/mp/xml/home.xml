@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="home">
+
+	
+	<select id="home.homeBestTop10" resultClass="memVO" >
+	
+    select com.com_name,member.mem_name,
+      com.com_id, member.mem_hp, com.com_tel
+      from
+      com,review,member
+      where com.com_id=review.com_id
+      and member.mem_no = com.mem_no
+      and
+      re_date>=to_date(add_months(sysdate,-1))
+      group by member.mem_name, com.com_id, com.com_name, member.mem_hp,
+      com.com_tel
+      having
+      avg(review.re_score) > 2.3 
+      and count(review.re_no)> 19
+      order by avg(review.re_score)
+       
+	
+	</select>
+	
+	
+	<select id="home.myZoneSelect" resultClass="ZoneVO" parameterClass="String">
+	
+	select zone1, zone2,zone3
+	from zone where mem_no = #String#
+	
+	</select>
+
+       
+	
+	<select id="home.homeEatBest5" resultClass="eatVO">
+	
+		select a.eat_no,a.eat_name,a.eat_cont1,a.eat_price,a.eat_qty,
+		a.in_date,a.eat_approve,a.com_id,a.eat_cont2,a.eat_del,sum(b.order_qty) as sum
+		from eatdeal a, request b
+        where b.eat_no = a.eat_no
+        and a.eat_approve ='Y'
+        group by a.eat_no, a.eat_name,a.eat_cont1,a.eat_price,a.eat_qty,a.in_date,
+        a.eat_approve,a.com_id,a.eat_cont2,a.eat_del
+        order by sum(b.order_qty) desc
+        
+	
+	</select>
+	
+	
+	<select id="home.homeComeBest5" resultClass="comVO" parameterClass="ZoneVO">
+	
+        select distinct a.com_id,   a.mem_no, a.com_name,	a.com_addr,	a.com_tel, 
+        a.com_cat,	a.com_key,	a.com_opentime,a.com_closetime,a.com_parking,	
+        a.com_menu,	a.com_photo,	a.com_foodprice, b.sumup
+        from(        
+        select distinct review.com_id, sum(review.re_up) as sumup 
+        from review, com  
+        where com.com_id = review.com_id  group by review.com_id 
+        ) b, 
+        (
+        select com_id,mem_no, com_name, com_addr,com_tel,
+        com_cat,com_key,com_opentime,com_closetime,
+        com_parking,com_menu,com_photo,com_foodprice 
+        from com   
+        where com_addr like '%' || #zone1# || '%' 
+        or com_addr like '%' || #zone2# || '%' 
+        or com_addr like '%' || #zone3# || '%' 
+        ) a
+        where a.com_id = b.com_id
+        order by b.sumup desc
+       
+	
+	</select>
+	
+
+</sqlMap>			
+
+
+
+
+

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="comjoin">
+   
+    
+    <select id="comjoin.idSearch" resultClass="kr.or.ddit.mp.vo.member.MemberVO" parameterClass="kr.or.ddit.mp.vo.member.MemberVO">
+    
+    	select mem_id from member where mem_id = #mem_id#
+    	
+    </select>
+    
+    <select id="comjoin.nickSearch" resultClass="kr.or.ddit.mp.vo.member.MemberVO" parameterClass="kr.or.ddit.mp.vo.member.MemberVO">
+    
+    	select mem_nick from member where mem_nick = #mem_nick#
+    	
+    </select>
+    
+    <select id="comjoin.zipSearch" resultClass="zipcodeVO" parameterClass="zipcodeVO">
+    	select zipcode, sido, gugun, dong from ziptb where dong like '%'||#dong#||'%' 
+    </select>
+    
+<!--      <insert id="comjoin.insertReadyComMember" parameterClass="readycomVO"> -->
+       
+<!--        insert into readycom (mem_id, mem_no, mem_pw, mem_name, mem_nick, mem_birth, mem_email, mem_hp, mem_zipcode, mem_addr, melonage, mem_grade, com_id, com_name, com_zipcode, com_addr, com_tel, com_cat) -->
+<!--                 values (#mem_id#, (select nvl(max(mem_no),0)+1) as mem_no FROM readycom), #mem_pw#, #mem_name#, #mem_nick#, to_date(#mem_birth#,'yy-mm-dd') as mem_birth, #mem_id#, #mem_hp#, #mem_zipcode#, #mem_addr#, '0', '업체', #com_id#, #com_name#, #com_zipcode#, #com_addr#, #com_tel#, #com_cat#) -->
+<!--     </insert> -->
+    
+    <update id="comjoin.insertReadyComMember" parameterClass="readycomVO">
+       
+       insert into readycom (mem_id, mem_no, mem_pw, mem_name, mem_nick, mem_birth, mem_email, mem_hp, mem_zipcode, mem_addr, melonage, mem_grade, com_id, com_name, com_zipcode, com_addr, com_tel, com_cat,com_key,com_opentime,com_closetime,com_parking,com_menu,com_foodprice)
+                values (#mem_id#, (select (nvl(max(mem_no),0) + 1 ) + 9000 FROM member), #mem_pw#, #mem_name#, #mem_nick#, to_date(#mem_birth#,'yy-mm-dd'), #mem_id#, #mem_hp#, #mem_zipcode#, #mem_addr#, '0', '업체', #com_id#, #com_name#, #com_zipcode#, #com_addr#, #com_tel#, #com_cat#,#com_key#,#com_opentime#,#com_closetime#,#com_parking#,#com_menu#,#com_foodprice#)
+   </update>
+    
+     <select id="comjoin.comidSearch" resultClass="kr.or.ddit.mp.vo.member.ComVO" parameterClass="kr.or.ddit.mp.vo.member.ComVO">
+    
+    	select com_id from com where com_id = #com_id#
+    	
+    </select>
+    
+	
+    
+
+    
+</sqlMap>
+
+
+
+<!-- com_id -->
+<!-- mem_no -->
+<!-- com_name -->
+<!-- com_addr -->
+<!-- com_tel -->
+<!-- com_cat -->
+<!-- com_zipcode -->
+
+
+
+
+
+<!--    mem_id -->
+<!-- 	mem_no -->
+<!-- 	mem_pw -->
+<!-- 	mem_name -->
+<!-- 	mem_nick -->
+<!-- 	mem_birth -->
+<!-- 	mem_mail -->
+<!-- 	mem_hp -->
+<!-- 	mem_addr -->
+<!-- 	melonage -->
+<!-- 	mem_grade -->
+<!-- mem_zipcode -->

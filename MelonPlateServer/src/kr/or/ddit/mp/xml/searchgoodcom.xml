@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="searchGoodcom">
+
+	
+	<select id="searchGoodcom.resultSearch" resultClass="comVO" parameterClass="String">
+	
+		select 
+			com_id,
+            mem_no,
+			com_name,
+			com_addr,
+			com_tel,
+			com_cat,
+			com_key,
+			com_opentime,
+			com_closetime,
+			com_parking,
+			com_menu,
+			com_photo,
+			com_foodprice
+		from com 
+		where com_key like '%' || #serchword# || '%' 
+        or com_name like '%' || #serchword# || '%' 
+        or com_addr like '%' || #serchword# || '%' 
+
+	
+	</select>
+
+
+</sqlMap>			
+
+
+
+
+
