@@ -1,11 +1,12 @@
-package kr.or.ddit.hl.join.dao;
+package kr.or.ddit.hl.service.join;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import kr.or.ddit.hl.vo.MemberVO;
 
-public interface IJoinDao {
-
+public interface IJoinService extends Remote{
+	
 	//아이디 중복 확인. true면 사용가능 false면 중복
 	public boolean selectId(String id) throws RemoteException;
 	

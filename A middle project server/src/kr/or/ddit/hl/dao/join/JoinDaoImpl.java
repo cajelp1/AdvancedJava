@@ -1,4 +1,4 @@
-package kr.or.ddit.hl.join.dao;
+package kr.or.ddit.hl.dao.join;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -10,7 +10,7 @@ import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
-import kr.or.ddit.hl.join.dao.JoinDaoImpl;
+import kr.or.ddit.hl.dao.join.JoinDaoImpl;
 import kr.or.ddit.hl.vo.MemberVO;
 
 public class JoinDaoImpl implements IJoinDao {
@@ -50,11 +50,13 @@ public class JoinDaoImpl implements IJoinDao {
 		boolean result = false;
 		
 		try {
-			String mem_id = (String)smc.queryForObject("join.selectId", id);
-			if(mem_id == null) {
+			MemberVO mem = (MemberVO)smc.queryForObject("join.selectId", id);
+			if(mem == null) {
 				result = true;
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -69,8 +71,8 @@ public class JoinDaoImpl implements IJoinDao {
 		boolean result = false;
 		
 		try {
-			String mem_nick = (String)smc.queryForObject("join.selectNick", id);
-			if(mem_nick == null) {
+			MemberVO mem = (MemberVO)smc.queryForObject("join.selectNick", id);
+			if(mem == null) {
 				result = true;
 			}
 		} catch (SQLException e) {

@@ -1,4 +1,4 @@
-package kr.or.ddit.hl.join.service;
+package kr.or.ddit.hl.service.join;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

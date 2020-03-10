@@ -1,21 +1,26 @@
-package kr.or.ddit.hl.join.service;
+package kr.or.ddit.hl.service.join;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-import kr.or.ddit.hl.join.dao.IJoinDao;
-import kr.or.ddit.hl.join.dao.JoinDaoImpl;
+import kr.or.ddit.hl.dao.join.IJoinDao;
+import kr.or.ddit.hl.dao.join.JoinDaoImpl;
 import kr.or.ddit.hl.vo.MemberVO;
 
-public class JoinServiceImpl implements IJoinService {
-	
+public class JoinServiceImpl extends UnicastRemoteObject implements IJoinService {
+
 	private static IJoinService service;
 	private IJoinDao dao;
 	
-	private JoinServiceImpl() {
+	
+	protected JoinServiceImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+		
 		dao = JoinDaoImpl.getInstance();
 	}
 	
-	public static IJoinService getInstance() {
+	public static IJoinService getInstance() throws RemoteException {
 		if(service == null) {
 			service = new JoinServiceImpl();
 		}
@@ -24,20 +29,20 @@ public class JoinServiceImpl implements IJoinService {
 	
 	@Override
 	public boolean selectId(String id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+
+		return dao.selectId(id);
 	}
 
 	@Override
 	public boolean selectNick(String id) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return dao.selectNick(id);
 	}
 
 	@Override
 	public boolean insertMember(MemberVO mv) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		return dao.insertMember(mv);
 	}
 
 }

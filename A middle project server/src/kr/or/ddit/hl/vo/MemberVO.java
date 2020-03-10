@@ -3,11 +3,15 @@ package kr.or.ddit.hl.vo;
 import java.io.Serializable;
 
 public class MemberVO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4474525627317280352L;
 	
 	private String mem_id      ;
 	private String mem_password;
 	private String mem_name    ;
-	private String men_nickname;
+	private String mem_nickname;
 	private String mem_jumin_no;
 	private String mem_email   ;
 	private String mem_hp      ;
@@ -17,7 +21,7 @@ public class MemberVO implements Serializable{
 	private int role_code      ;
 	private String mem_addr1;
 	private String mem_addr2;
-	private int mem_zipcode;
+	private String mem_zipcode;
 	
 	public String getMem_id() {
 		return mem_id;
@@ -37,11 +41,11 @@ public class MemberVO implements Serializable{
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
 	}
-	public String getMen_nickname() {
-		return men_nickname;
+	public String getMem_nickname() {
+		return mem_nickname;
 	}
-	public void setMen_nickname(String men_nickname) {
-		this.men_nickname = men_nickname;
+	public void setMem_nickname(String mem_nickname) {
+		this.mem_nickname = mem_nickname;
 	}
 	public String getMem_jumin_no() {
 		return mem_jumin_no;
@@ -97,10 +101,10 @@ public class MemberVO implements Serializable{
 	public void setMem_addr2(String mem_addr2) {
 		this.mem_addr2 = mem_addr2;
 	}
-	public int getMem_zipcode() {
+	public String getMem_zipcode() {
 		return mem_zipcode;
 	}
-	public void setMem_zipcode(int mem_zipcode) {
+	public void setMem_zipcode(String mem_zipcode) {
 		this.mem_zipcode = mem_zipcode;
 	}
 	

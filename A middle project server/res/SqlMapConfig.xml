@@ -9,12 +9,12 @@
 	
 	<settings cacheModelsEnabled="true" enhancementEnabled="true"
 		lazyLoadingEnabled="true" maxRequests="32" maxSessions="10"
-		maxTransactions="5" useStatementNamespaces="false" />
+		maxTransactions="5" useStatementNamespaces="true" />
 	
 	
 	<!-- type alias -->
 	
-	<typeAlias alias="memVO" 		type="kr.or.ddit.hl.vo.member.MemberVO"/>
+	<typeAlias alias="MemberVO" 		type="kr.or.ddit.hl.vo.MemberVO"/>
 	
 	
 	
