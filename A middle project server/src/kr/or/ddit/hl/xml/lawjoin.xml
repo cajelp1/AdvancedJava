@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="lawjoin">
+	
+    
+    <select id="selectId" resultClass="LawyerVO" parameterClass="String">
+    
+    	select * from lawyer where law_id = #law_id#
+    	
+    </select>
+    
+    <select id="selectNick" resultClass="LawyerVO" parameterClass="String">
+    
+    	select * from lawyer where law_nickname = #law_nickname#
+    	
+    </select>
+    
+    <select id="selectLawfirm" resultClass="LawfirmVO" parameterClass="LawfirmVO">
+    
+    	SELECT * FROM lawfirm WHERE lawfirm_name = #lawfirm_name# 
+    							AND lawfirm_code = #lawfirm_code#
+    </select>
+    
+    <insert id="insertLawyer" parameterClass="LawyerVO">
+		
+       	insert into lawyer (law_id, law_password, law_name, law_nickname, law_jumin_no, 
+       						law_email, law_hp, law_company_name, law_date, role_code, 
+							law_addr1, law_addr2, law_zipcode)
+       	values (#law_id#, #law_password#, #law_name#, #law_nickname#, #law_jumin_no#, 
+       			#law_email#, #law_hp#, #law_company_name#, sysdate, 2, 
+				#law_addr1#, #law_addr2#, #law_zipcode#)
+    	
+    	<selectKey keyProperty="law_id" resultClass="String">
+			select law_id from lawyer where law_id = #law_id#
+		</selectKey>
+    
+    </insert>
+    
+    
+    
+</sqlMap>
+

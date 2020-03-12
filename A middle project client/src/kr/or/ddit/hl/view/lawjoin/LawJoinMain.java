@@ -1,4 +1,4 @@
-package kr.or.ddit.hl.view.join;
+package kr.or.ddit.hl.view.lawjoin;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,15 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class JoinMain extends Application{
-
+public class LawJoinMain extends Application{
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		Parent root = FXMLLoader.load(getClass().getResource("GeneralJoin.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("LawyerJoin.fxml"));
 		
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("일반 회원가입");
+		primaryStage.setTitle("변호사 회원가입");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

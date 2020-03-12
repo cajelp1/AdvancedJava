@@ -54,6 +54,7 @@ public class LoginDaoImpl implements ILoginDao {
 		return memberList;
 	}
 	
+	
 	@Override
 	public List<MemberVO> memNoSearch(MemberVO mv) {
 		List<MemberVO> memberList = new ArrayList<MemberVO>();
@@ -64,6 +65,7 @@ public class LoginDaoImpl implements ILoginDao {
 		}
 		return memberList;
 	}
+	
 	
 	@Override
 	public List<MemberVO> pwSearch(MemberVO mv) {
@@ -76,7 +78,8 @@ public class LoginDaoImpl implements ILoginDao {
 		}
 		return memberList;
 	}
-
+	
+	
 	@Override
 	public List<ComVO> iscom(String mem_no) throws RemoteException {
 		

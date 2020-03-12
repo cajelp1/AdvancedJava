@@ -2,7 +2,8 @@ package kr.or.ddit.hl.vo;
 
 import java.io.Serializable;
 
-public class LaywerVO implements Serializable{
+public class LawyerVO implements Serializable{
+	
 	private String law_id;
 	private String law_password;
 	private String law_name;
@@ -10,7 +11,6 @@ public class LaywerVO implements Serializable{
 	private String law_jumin_no;
 	private String law_email;
 	private String law_hp;
-	private String law_manager_id;
 	private String law_company_name;
 	private String law_date;
 	private String role_code;
@@ -74,14 +74,6 @@ public class LaywerVO implements Serializable{
 		this.law_hp = law_hp;
 	}
 
-	public String getLaw_manager_id() {
-		return law_manager_id;
-	}
-
-	public void setLaw_manager_id(String law_manager_id) {
-		this.law_manager_id = law_manager_id;
-	}
-
 	public String getLaw_company_name() {
 		return law_company_name;
 	}
@@ -129,5 +121,5 @@ public class LaywerVO implements Serializable{
 	public void setLaw_zipcode(String law_zipcode) {
 		this.law_zipcode = law_zipcode;
 	}
-	
+
 }

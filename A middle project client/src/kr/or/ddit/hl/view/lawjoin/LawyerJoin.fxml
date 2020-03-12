@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+fx:controller="kr.or.ddit.hl.view.lawjoin.LawJoinController">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="681.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@rightTop.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="19.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@leftDown.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="350.0" fitWidth="376.0" layoutX="221.0" layoutY="-79.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@logo2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="84.0" layoutY="188.0" prefHeight="12.0" prefWidth="51.0" text="아이디">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="84.0" layoutY="226.0" prefHeight="12.0" prefWidth="51.0" text="이름">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="84.0" layoutY="261.0" prefHeight="20.0" prefWidth="68.0" text="비밀번호">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="85.0" layoutY="298.0" prefHeight="20.0" prefWidth="77.0" text="비밀번호 확인">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="84.0" layoutY="338.0" prefHeight="12.0" prefWidth="51.0" text="닉네임">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="84.0" layoutY="375.0" prefHeight="12.0" prefWidth="51.0" text="로펌명">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="84.0" layoutY="450.0" prefHeight="12.0" prefWidth="51.0" text="이메일">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lawfirm_code" layoutX="177.0" layoutY="408.0" prefHeight="23.0" prefWidth="131.0" />
+      <Label layoutX="81.0" layoutY="412.0" prefHeight="16.0" prefWidth="85.0" text="로펌코드">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="420.0" layoutY="375.0" prefHeight="16.0" prefWidth="105.0" text="자동가입 방지문자">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="420.0" layoutY="338.0" prefHeight="12.0" prefWidth="51.0" text="상세주소">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="420.0" layoutY="299.0" prefHeight="20.0" prefWidth="77.0" text="주소">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="420.0" layoutY="224.0" prefHeight="20.0" prefWidth="85.0" text="주민등록번호">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="419.0" layoutY="189.0" prefHeight="16.0" prefWidth="68.0" text="휴대폰 번호">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lawfirm_name" layoutX="177.0" layoutY="371.0" prefHeight="23.0" prefWidth="131.0" />
+      <ImageView fitHeight="57.0" fitWidth="131.0" layoutX="533.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <TextField fx:id="law_nickname" layoutX="177.0" layoutY="334.0" prefHeight="23.0" prefWidth="131.0" />
+      <TextField fx:id="law_password2" layoutX="177.0" layoutY="297.0" prefHeight="23.0" prefWidth="131.0" />
+      <PasswordField fx:id="law_password" layoutX="177.0" layoutY="260.0" prefHeight="23.0" prefWidth="131.0" />
+      <TextField fx:id="law_name" layoutX="177.0" layoutY="222.0" prefHeight="23.0" prefWidth="131.0" />
+      <TextField fx:id="law_id" layoutX="177.0" layoutY="184.0" prefHeight="23.0" prefWidth="131.0" />
+      <TextField fx:id="capcha" layoutX="532.0" layoutY="447.0" prefHeight="23.0" prefWidth="131.0" />
+      <TextField fx:id="law_addr2" layoutX="530.0" layoutY="335.0" prefHeight="23.0" prefWidth="131.0" />
+      <TextField fx:id="law_addr1" layoutX="529.0" layoutY="297.0" prefHeight="23.0" prefWidth="131.0" />
+      <TextField fx:id="law_jumin1" layoutX="528.0" layoutY="223.0" prefHeight="23.0" prefWidth="61.0" />
+      <TextField fx:id="law_hp" layoutX="528.0" layoutY="186.0" prefHeight="23.0" prefWidth="131.0" />
+      <Button fx:id="btnCancel" layoutX="411.0" layoutY="511.0" mnemonicParsing="false" onAction="#cancel" prefHeight="57.0" prefWidth="85.0" style="-fx-border-radius: 20px; -fx-border-color: black; -fx-background-color: rgba( 255, 255, 255, 0 );" text="취소">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnOk" layoutX="299.0" layoutY="511.0" mnemonicParsing="false" onAction="#ok" prefHeight="57.0" prefWidth="85.0" style="-fx-border-radius: 20px; -fx-border-color: black; -fx-background-color: rgba( 255, 255, 255, 0 );" text="확인">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Label layoutX="420.0" layoutY="262.0" prefHeight="20.0" prefWidth="77.0" text="우편번호">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="law_zipcode" layoutX="528.0" layoutY="261.0" prefHeight="23.0" prefWidth="131.0" />
+      <Button fx:id="btnZipSearch" layoutX="681.0" layoutY="261.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="68.0" style="-fx-border-radius: 20px; -fx-border-color: black; -fx-background-color: rgba( 255, 255, 255, 0 );" text="주소검색">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnLawfirmCheck" layoutX="322.0" layoutY="408.0" mnemonicParsing="false" onAction="#lawfirmCheck" prefHeight="21.0" prefWidth="68.0" style="-fx-border-radius: 20px; -fx-border-color: black; -fx-background-color: rgba( 255, 255, 255, 0 );" text="로펌확인">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnIdCheck" layoutX="322.0" layoutY="184.0" mnemonicParsing="false" onAction="#idCheck" prefHeight="21.0" prefWidth="68.0" style="-fx-border-radius: 20px; -fx-border-color: black; -fx-background-color: rgba( 255, 255, 255, 0 );" text="중복확인">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnNickCheck" layoutX="322.0" layoutY="335.0" mnemonicParsing="false" onAction="#nickCheck" prefHeight="21.0" prefWidth="68.0" style="-fx-border-radius: 20px; -fx-border-color: black; -fx-background-color: rgba( 255, 255, 255, 0 );" text="중복확인">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <TextField fx:id="law_email" layoutX="177.0" layoutY="447.0" prefHeight="23.0" prefWidth="131.0" />
+      <TextField fx:id="law_jumin2" layoutX="599.0" layoutY="223.0" prefHeight="23.0" prefWidth="61.0" />
+      <Label layoutX="420.0" layoutY="450.0" prefHeight="16.0" prefWidth="105.0" text="방지문자 입력 ">
+         <font>
+            <Font name="Cambria Bold Italic" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

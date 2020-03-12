@@ -1,17 +1,13 @@
 package kr.or.ddit.hl.dao.join;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.charset.Charset;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
-import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
 import kr.or.ddit.hl.dao.join.JoinDaoImpl;
 import kr.or.ddit.hl.vo.MemberVO;
+import kr.or.ddit.hl.util.SqlMapClientFactory;
 
 public class JoinDaoImpl implements IJoinDao {
 	
@@ -20,19 +16,7 @@ public class JoinDaoImpl implements IJoinDao {
 	private static IJoinDao dao;
 	
 	private JoinDaoImpl() {
-		
-		try {
-			
-			Charset charset = Charset.forName("UTF-8");
-			Resources.setCharset(charset);
-			Reader rd = Resources.getResourceAsReader("SqlMapConfig.xml");
-			smc = SqlMapClientBuilder.buildSqlMapClient(rd);
-			rd.close();
-			
-		}catch(IOException e){
-			System.out.println("SqlMapClient 생성 실패!!!");
-			e.printStackTrace();
-		}
+		smc = SqlMapClientFactory.getInstance();
 	}
 	
 	public static IJoinDao getInstance() {

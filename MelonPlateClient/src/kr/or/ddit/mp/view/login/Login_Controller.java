@@ -33,7 +33,7 @@ import kr.or.ddit.mp.vo.member.MemberVO;
 import kr.or.ddit.mp.vo.mypage.ZoneVO;
 
 public class Login_Controller implements Initializable{
-
+	
 	@FXML Button btn_login;
 	@FXML ImageView img_kakaologin;
 	@FXML ImageView img_naverlogin;

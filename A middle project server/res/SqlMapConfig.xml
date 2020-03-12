@@ -15,7 +15,8 @@
 	<!-- type alias -->
 	
 	<typeAlias alias="MemberVO" 		type="kr.or.ddit.hl.vo.MemberVO"/>
-	
+	<typeAlias alias="LawyerVO" 		type="kr.or.ddit.hl.vo.LawyerVO"/>
+	<typeAlias alias="LawfirmVO" 		type="kr.or.ddit.hl.vo.LawfirmVO"/>
 	
 	
 	<transactionManager type="JDBC">
@@ -32,6 +33,8 @@
 	<!--  SqlMapConfig_Recog -->
 	
 	<sqlMap resource="kr/or/ddit/hl/xml/join.xml"/>
+	<sqlMap resource="kr/or/ddit/hl/xml/lawjoin.xml"/>
+	<sqlMap resource="kr/or/ddit/hl/xml/login.xml"/>
 	
 	
 	

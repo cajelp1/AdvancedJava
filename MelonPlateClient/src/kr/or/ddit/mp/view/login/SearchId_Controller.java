@@ -24,7 +24,7 @@ public class SearchId_Controller implements Initializable {
 	@FXML Button btn_find;
 	@FXML TextField txtf_name;
 	@FXML TextField txtf_ph;
-
+	
 	
 	private Registry reg;
 	private ILoginService ilogin;

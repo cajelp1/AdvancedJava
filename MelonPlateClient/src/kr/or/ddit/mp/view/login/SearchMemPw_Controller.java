@@ -42,7 +42,6 @@ public class SearchMemPw_Controller implements Initializable{
 	List<MemberVO> list = new ArrayList<MemberVO>();
 	private MemberVO mvo = new MemberVO();
 	
-
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -148,13 +147,13 @@ public class SearchMemPw_Controller implements Initializable{
 	}
 	
 	
-	 private void infoMsg(String headerText, String msg) {
+	private void infoMsg(String headerText, String msg) {
          Alert errAlert = new Alert(AlertType.INFORMATION);
          errAlert.setTitle("MelonPlate Id 찾기");
          errAlert.setHeaderText(headerText);
          errAlert.setContentText(msg);
          errAlert.showAndWait();
-      }
+    }
 
 
 }
