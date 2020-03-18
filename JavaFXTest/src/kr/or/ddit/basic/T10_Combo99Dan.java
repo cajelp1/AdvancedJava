@@ -55,7 +55,11 @@ public class T10_Combo99Dan extends Application{
 		root.setCenter(txtResult);
 		*/
 		
-		Parent root = FXMLLoader.load(getClass().getResource("Combo99dan.fxml"));
+		//Parent root = FXMLLoader.load(getClass().getResource("Combo99dan.fxml"));
+		FXMLLoader fl = new FXMLLoader(getClass().getResource("Combo99dan.fxml"));
+		Parent root = fl.load();
+		Combo99DanController cont = fl.getController();
+		
 		
 		
 		Scene scene = new Scene(root);

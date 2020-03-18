@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="qna">
+	 
+	 
+	 <!-- 글 추가 -->
+	 <insert id="insertQna" parameterClass="qnaVO">
+	 
+	 INSERT INTO qnaboard(
+	 	no, qna_title, qna_content, qna_writer,
+	 	qna_secret_yn, qna_writer_id, qna_delete_yn, 
+	 	qna_date, qna_group) 
+	 VALUES (
+	 	qnaboard_pk_seq.NEXTVAL, #qna_title#, #qna_content#, #qna_writer#, 
+	 	#qna_secret_yn#, #qna_writer_id#, 'n', SYSDATE, qnaboard_pk_seq.CURRVAL)
+	 
+	 <!-- 성공하면 seq를 리턴하고 실패하면 에러가 뜬다 -->
+	 <selectKey keyProperty="no" resultClass="int">
+        SELECT qnaboard_pk_seq.CURRVAL FROM DUAL
+     </selectKey>    
+	 </insert>
+	 
+	 
+	 
+	 <!-- 변호사글 추가 -->
+	 <insert id="answerQna" parameterClass="qnaVO">
+	 
+	 INSERT INTO qnaboard(
+	 	no, qna_title, qna_content, qna_writer,
+	 	qna_secret_yn, qna_writer_id, qna_delete_yn, 
+	 	qna_date, qna_group) 
+	 VALUES (
+	 	qnaboard_pk_seq.NEXTVAL, #qna_title#, #qna_content#, #qna_writer#, 
+	 	#qna_secret_yn#, #qna_secret_yn#, 'n', SYSDATE, #qna_group#)
+	 
+	 <!-- 성공하면 seq를 리턴하고 실패하면 에러가 뜬다 -->
+	 <selectKey keyProperty="no" resultClass="int">
+        SELECT qnaboard_pk_seq.CURRVAL FROM DUAL
+     </selectKey>    
+	 </insert>
+	 
+	 
+	 
+	 <!-- 글 수정 -->
+	 <update id="updateQna" parameterClass="qnaVO">
+	 
+	 UPDATE qnaboard SET 
+	 		qna_title = #qna_title#, qna_writer = #qna_writer#, qna_content = #qna_content#, 
+	 		qna_secret_yn = #qna_secret_yn#
+	 	WHERE no = #no#
+	 
+	 </update>
+	 
+	 
+	 
+	 <!-- 글 삭제 -->
+	 <delete id="deleteQna" parameterClass="Integer">
+	 
+	 UPDATE qnaboard SET 
+	 		qna_delete_yn = 'y' 
+	 	WHERE no = #no#
+	 
+	 </delete>
+	 
+	 
+	 
+	 <!-- 글 전체 가져오기 -->
+	 <select id="getAllQnaList" resultClass="qnaVO">
+	 
+     	SELECT * 
+     	
+     	FROM qnaboard
+     	WHERE qna_delete_yn != 'y'
+     	ORDER BY qna_group desc, no
+     
+	 </select>
+	 
+	 
+	 
+	 <!-- 글 검색하기 -->
+	 <select id="getSearchQna" parameterClass="qnaVO" resultClass="qnaVO">
+	 	SELECT * FROM qnaboard WHERE 1=1
+	 	<isNotEmpty property="qna_writer">
+	 		AND qna_writer Like '%' || #qna_writer# || '%'
+	 	</isNotEmpty>
+	 	<isNotEmpty property="qna_title">
+	 		AND qna_title Like '%' || #qna_title# || '%'
+	 	</isNotEmpty>
+	 	<isNotEmpty property="qna_content">
+	 		AND qna_content Like '%' || #qna_content# || '%'
+	 	</isNotEmpty>
+	 	AND qna_delete_yn != 'y'
+	 	AND qna_secret_yn != 'y'
+	 
+	 </select>
+	 
+	 
+	 
+	 <!-- 비밀글 중 회원이 접근 가능한 글인지 확인하기 -->
+	 <!-- 
+	 		qnaboard를 qna_group = no 로 셀프 조인하여 원글 작성자의 아이디를 리턴한다. 
+	 		컨트롤러에서 접속중인 회원의 아이디와 비교하여 기능 구현.
+	  -->
+	 <select id="secretCheck" parameterClass="int" resultClass="String">
+	 	SELECT b.qna_writer_id
+		FROM qnaboard a, qnaboard b
+		WHERE a.qna_group = b.no
+		AND a.no = #data#
+	 	
+	 </select>
+	 
+	 
+</sqlMap>			
+
+
+
+
+

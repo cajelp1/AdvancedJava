@@ -5,10 +5,15 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import kr.or.ddit.hl.service.cust.CustServiceImpl;
+import kr.or.ddit.hl.service.cust.ICustService;
 import kr.or.ddit.hl.service.join.IJoinService;
 import kr.or.ddit.hl.service.join.ILawJoinService;
 import kr.or.ddit.hl.service.join.JoinServiceImpl;
 import kr.or.ddit.hl.service.join.LawJoinServiceImpl;
+import kr.or.ddit.hl.service.qna.IQnaService;
+import kr.or.ddit.hl.service.qna.QnaServiceImpl;
+import kr.or.ddit.hl.vo.QnaBoardVO;
 
 public class HLMain {
 	
@@ -36,11 +41,21 @@ public class HLMain {
 			ILawJoinService lawjoin = LawJoinServiceImpl.getInstance();
 			reg.rebind("LawJoin", lawjoin);
 			
+			//QnA 게시판
+			IQnaService qna = QnaServiceImpl.getInstance();
+			reg.rebind("QnA", qna);
+			
+			
+			//고객센터
+			ICustService cust = CustServiceImpl.getInstance();
+			reg.rebind("Customer", cust);
 			
 			
 			System.out.println("서버가 준비되었습니다.");
 			
 		}catch(RemoteException e) {e.printStackTrace();}
+		
+		
 		
 	}
 	

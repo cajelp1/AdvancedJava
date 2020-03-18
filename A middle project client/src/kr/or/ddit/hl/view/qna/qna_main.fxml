@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.hl.view.qna.QnaController">
+   <children>
+      <ImageView fitHeight="616.0" fitWidth="794.0" layoutX="6.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@테두리.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="244.0" fitWidth="101.0" layoutX="351.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@공지사항.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnWrite" layoutX="642.0" layoutY="490.0" mnemonicParsing="false" onAction="#write" text="글쓰기" />
+      <Button fx:id="btnSearch" layoutX="592.0" layoutY="490.0" mnemonicParsing="false" onAction="#search" text="검색" />
+      <TableView fx:id="tableview" layoutX="113.0" layoutY="147.0" prefHeight="260.0" prefWidth="580.0">
+        <columns>
+          <TableColumn fx:id="no" minWidth="-Infinity" prefWidth="50.0" resizable="false" text="no" />
+            <TableColumn fx:id="title" minWidth="-Infinity" prefWidth="270.0" resizable="false" text="제목" />
+            <TableColumn fx:id="writer" minWidth="-Infinity" prefWidth="100.0" resizable="false" text="작성자" />
+          <TableColumn fx:id="secret_yn" minWidth="-Infinity" prefWidth="50.0" resizable="false" text="비공개" />
+            <TableColumn fx:id="date" minWidth="-Infinity" prefWidth="100.0" resizable="false" text="날짜" />
+        </columns>
+      </TableView>
+      <Pagination fx:id="pagination" layoutX="112.0" layoutY="145.0" prefHeight="328.0" prefWidth="582.0" style="-fx-alignment: center;" />
+      <ComboBox fx:id="combo" layoutX="113.0" layoutY="490.0" prefHeight="23.0" prefWidth="92.0" />
+      <TextField fx:id="fieldSearch" layoutX="218.0" layoutY="490.0" prefHeight="23.0" prefWidth="363.0" />
+      <Label layoutX="342.0" layoutY="73.0" text="QnA">
+         <font>
+            <Font size="51.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

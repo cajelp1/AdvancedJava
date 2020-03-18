@@ -4,11 +4,15 @@
          "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="lawjoin">
-	
+
     
-    <select id="selectId" resultClass="LawyerVO" parameterClass="String">
     
-    	select * from lawyer where law_id = #law_id#
+    <select id="selectId" resultClass="String" parameterClass="String">
+    
+    	select * from (
+	    	select mem_id from member where mem_id = #mem_id#
+	    	union
+	    	select law_id from lawyer where law_id = #mem_id#)
     	
     </select>
     
@@ -20,12 +24,12 @@
     
     <select id="selectLawfirm" resultClass="LawfirmVO" parameterClass="LawfirmVO">
     
-    	SELECT * FROM lawfirm WHERE lawfirm_name = #lawfirm_name# 
-    							AND lawfirm_code = #lawfirm_code#
+    	SELECT * FROM lawfirm WHERE lawfirm_name = #lawfirm_name# AND lawfirm_code = #lawfirm_code#
+    	
     </select>
     
     <insert id="insertLawyer" parameterClass="LawyerVO">
-		
+       
        	insert into lawyer (law_id, law_password, law_name, law_nickname, law_jumin_no, 
        						law_email, law_hp, law_company_name, law_date, role_code, 
 							law_addr1, law_addr2, law_zipcode)

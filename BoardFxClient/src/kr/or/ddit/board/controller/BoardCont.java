@@ -129,7 +129,7 @@ public class BoardCont {
     			int result = service.insertBoard(bv2);
     			if(result == 0) {
     				infoMsg("게시글이 등록되었습니다", "성공");
-    				main.setData();
+    				main.setData();			////여기!!!
     		    	close(null);
     		    	
     			}else {

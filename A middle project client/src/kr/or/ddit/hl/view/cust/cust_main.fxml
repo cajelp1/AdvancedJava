@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.hl.view.cust.CustController">
+   <children>
+      <ImageView fitHeight="616.0" fitWidth="794.0" layoutX="6.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@테두리.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="244.0" fitWidth="101.0" layoutX="351.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@공지사항.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnWrite" layoutX="654.0" layoutY="490.0" mnemonicParsing="false" onAction="#write" text="글쓰기" />
+      <Button fx:id="btnSearch" layoutX="600.0" layoutY="490.0" mnemonicParsing="false" onAction="#search" text="검색" />
+      <TableView fx:id="tableview" layoutX="95.0" layoutY="148.0" prefHeight="265.0" prefWidth="611.0">
+        <columns>
+          <TableColumn fx:id="no" minWidth="-Infinity" prefWidth="70.0" text="no" />
+            <TableColumn fx:id="title" minWidth="-Infinity" prefWidth="250.0" text="제목" />
+            <TableColumn fx:id="writer" minWidth="-Infinity" prefWidth="100.0" text="작성자" />
+            <TableColumn fx:id="date" minWidth="-Infinity" prefWidth="150.0" text="날짜" />
+        </columns>
+      </TableView>
+      <Pagination fx:id="pagination" layoutX="80.0" layoutY="134.0" prefHeight="351.0" prefWidth="644.0" />
+      <ComboBox fx:id="combo" layoutX="95.0" layoutY="490.0" prefHeight="23.0" prefWidth="92.0" />
+      <TextField fx:id="fieldSearch" layoutX="201.0" layoutY="490.0" prefHeight="23.0" prefWidth="388.0" />
+      <Label layoutX="321.0" layoutY="73.0" text="고객센터">
+         <font>
+            <Font size="51.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

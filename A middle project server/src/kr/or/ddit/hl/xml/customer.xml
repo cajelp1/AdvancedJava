@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="cust">
+	 
+	 
+	 <!-- 글 추가 -->
+	 <insert id="insertCust" parameterClass="CustVO">
+	 
+	 INSERT INTO customercenter(
+	 	no, cust_title, cust_content, cust_writer, date, cust_delete_yn) 
+	 VALUES (
+	 	customercenter_pk_seq.NEXTVAL, #cust_title#, #cust_content#, #cust_writer#,
+	 	'n' 
+	 	SYSDATE)
+	 
+	 <!-- 성공하면 seq를 리턴하고 실패하면 에러가 뜬다 -->
+	 <selectKey keyProperty="no" resultClass="int">
+        SELECT customercenter_pk_seq.CURRVAL FROM DUAL
+     </selectKey>    
+	 </insert>
+	 
+	 
+	 <!-- 글 수정 -->
+	 <update id="updateCust" parameterClass="CustVO">
+	 
+	 UPDATE customercenter SET 
+	 		cust_title = #cust_title#, cust_writer = #cust_writer#, cust_content = #cust_content#
+	 	WHERE no = #no#
+	 
+	 </update>
+	 
+	 
+	 <!-- 글 삭제 -->
+	 <delete id="deleteCust" parameterClass="Integer">
+	 
+	 UPDATE customercenter SET 
+	 		cust_delete_yn = 'y' 
+	 	WHERE no = #no#
+	 
+	 </delete>
+	 
+	 
+	 <!-- 글 선택 -->
+	 <select id="selectCust" parameterClass = "String">
+	 
+	 SELECT * FROM customercenter WHERE no = #no#
+	 
+	 </select>
+	 
+	 
+	 <!-- 글 전체 가져오기 -->
+	 <select id="getAllCustList" resultClass="CustVO">
+	 
+     	SELECT * FROM customercenter   
+     	WHERE cust_delete_yn != 'y'
+     	ORDER BY cust_group desc, no
+     
+	 </select>
+	 
+	 
+	 <!-- 글 검색하기 -->
+	 <select id="getSearchCust" parameterClass="CustVO" resultClass="CustVO">
+	 	SELECT * FROM customercenter WHERE 1=1
+	 	<isNotEmpty property="qna_writer">
+	 		AND cust_writer Like '%' || #cust_writer# || '%'
+	 	</isNotEmpty>
+	 	<isNotEmpty property="qna_title">
+	 		AND cust_title Like '%' || #cust_title# || '%'
+	 	</isNotEmpty>
+	 	<isNotEmpty property="qna_content">
+	 		AND cust_content Like '%' || #cust_content# || '%'
+	 	</isNotEmpty>
+	 	AND cust_delete_yn != 'y'
+	 
+	 </select>
+	 
+</sqlMap>
+	 
+	 

@@ -17,6 +17,8 @@
 	<typeAlias alias="MemberVO" 		type="kr.or.ddit.hl.vo.MemberVO"/>
 	<typeAlias alias="LawyerVO" 		type="kr.or.ddit.hl.vo.LawyerVO"/>
 	<typeAlias alias="LawfirmVO" 		type="kr.or.ddit.hl.vo.LawfirmVO"/>
+	<typeAlias alias="qnaVO" 			type="kr.or.ddit.hl.vo.QnaBoardVO"/>
+	<typeAlias alias="CustVO" 		type="kr.or.ddit.hl.vo.CustomerCenterVO"/>
 	
 	
 	<transactionManager type="JDBC">
@@ -35,9 +37,10 @@
 	<sqlMap resource="kr/or/ddit/hl/xml/join.xml"/>
 	<sqlMap resource="kr/or/ddit/hl/xml/lawjoin.xml"/>
 	<sqlMap resource="kr/or/ddit/hl/xml/login.xml"/>
+	<sqlMap resource="kr/or/ddit/hl/xml/Qna.xml"/>
+	<sqlMap resource="kr/or/ddit/hl/xml/customer.xml"/>
 	
-	
-	
+
 </sqlMapConfig>
 
 
