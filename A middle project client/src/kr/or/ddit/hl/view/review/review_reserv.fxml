@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.hl.view.review.ReviewReserv">
+   <children>
+      <Label layoutX="52.0" layoutY="10.0" text="리뷰 작성 가능한 예약 선택하기">
+         <font>
+            <Font name="Serif Regular" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableview" layoutX="5.0" layoutY="40.0" prefHeight="330.0" prefWidth="350.0">
+        <columns>
+          <TableColumn fx:id="res_no" prefWidth="70.0" resizable="false" text="예약번호" />
+          <TableColumn fx:id="res_lawer_id" prefWidth="75.0" resizable="false" text="변호사 이름" />
+            <TableColumn fx:id="res_type" prefWidth="100.0" resizable="false" text="예약타입" />
+            <TableColumn fx:id="res_date" prefWidth="100.0" resizable="false" text="예약날짜" />
+        </columns>
+      </TableView>
+      <Pagination fx:id="pagination" layoutX="6.0" layoutY="40.0" prefHeight="380.0" prefWidth="350.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="270.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="41.0" layoutY="14.0" text="신고 사유를 적어주세요">
+         <font>
+            <Font name="Serif Regular" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="reason" layoutX="35.0" layoutY="48.0" prefHeight="200.0" prefWidth="200.0" promptText="공백포함 200자 이내로 신고사유를 적어주세요" />
+      <Button fx:id="btnOk" layoutX="83.0" layoutY="263.0" mnemonicParsing="false" text="확인" />
+      <Button fx:id="btnCancel" layoutX="146.0" layoutY="263.0" mnemonicParsing="false" text="취소" />
+   </children>
+</AnchorPane>

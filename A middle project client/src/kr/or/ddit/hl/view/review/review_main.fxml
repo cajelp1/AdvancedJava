@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="reviewPane" layoutX="50.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.hl.view.review.ReviewController">
+   <children>
+      <ImageView fitHeight="768.0" fitWidth="1024.0" pickOnBounds="true">
+         <image>
+            <Image url="@테두리.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="244.0" fitWidth="101.0" layoutX="379.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@qna.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnSearch" layoutX="729.0" layoutY="602.0" mnemonicParsing="false" onAction="#search" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="검색" />
+      <TableView fx:id="tableview" layoutX="112.0" layoutY="186.0" prefHeight="350.0" prefWidth="800.0">
+        <columns>
+          <TableColumn fx:id="no" minWidth="-Infinity" prefWidth="60.0" resizable="false" text="no" />
+            <TableColumn fx:id="title" minWidth="-Infinity" prefWidth="330.0" resizable="false" text="제목" />
+            <TableColumn fx:id="writer" minWidth="-Infinity" prefWidth="160.0" resizable="false" text="작성자" />
+          <TableColumn fx:id="score" minWidth="-Infinity" prefWidth="90.0" resizable="false" text="평점" />
+            <TableColumn fx:id="date" minWidth="-Infinity" prefWidth="160.0" resizable="false" text="날짜" />
+        </columns>
+      </TableView>
+      <Pagination fx:id="pagination" layoutX="103.0" layoutY="255.0" prefHeight="334.0" prefWidth="817.0" style="-fx-alignment: center;" />
+      <ComboBox fx:id="combo1" layoutX="195.0" layoutY="603.0" prefHeight="23.0" prefWidth="100.0" />
+      <TextField fx:id="fieldSearch" layoutX="302.0" layoutY="603.0" prefHeight="23.0" prefWidth="279.0" />
+      <ImageView fitHeight="117.0" fitWidth="150.0" layoutX="489.0" layoutY="62.0" pickOnBounds="true">
+         <image>
+            <Image url="@게시판.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnmenu" layoutX="730.0" layoutY="645.0" mnemonicParsing="false" onAction="#toMenu" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="메뉴화면으로" />
+      <Button fx:id="btnWrite" layoutX="195.0" layoutY="645.0" mnemonicParsing="false" onAction="#write" prefWidth="100.0" style="-fx-background-color: wheat; -fx-border-color: black;" text="글 작성하기" />
+      <ComboBox fx:id="combo2" layoutX="591.0" layoutY="603.0" prefHeight="23.0" prefWidth="130.0" />
+   </children>
+</AnchorPane>

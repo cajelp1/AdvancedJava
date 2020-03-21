@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+         PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+         "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="review">
+	 
+     
+     <!-- 글 추가 -->
+	 <insert id="insertReview" parameterClass="ReviewVO">
+	 <!-- 성공하면 seq를 리턴하고 실패하면 에러가 뜬다 -->
+	 <selectKey keyProperty="review_no" resultClass="int">
+        SELECT review_pk_seq.NextVal FROM DUAL
+     </selectKey>
+	 
+	 INSERT INTO review(
+	 	review_no, review_title, review_content, review_writer, review_grade, review_date,
+	 	review_deleteyn, review_writer_id, res_no)
+	 VALUES (
+	 	#review_no#, #review_title#, #review_content#, #review_writer#, 
+	 	#review_grade#, sysdate, 'n', #review_writer_id#, #res_no#)
+	 
+	 </insert>
+	 
+	 
+	 
+	 <!-- 신고 추가 -->
+	 <insert id="insertReport" parameterClass="ReportVO">
+	 
+	 INSERT INTO report(
+	 	report_no, report_id, report_reason, report_date, review_no, report_status)
+	 VALUES (
+	 	report_pk_seq.NEXTVAL, #report_id#, #report_reason#, sysdate, #review_no#, '0')
+	 
+	 <!-- 성공하면 seq를 리턴하고 실패하면 에러가 뜬다 -->
+	 <selectKey keyProperty="review_no" resultClass="int">
+        SELECT report_pk_seq.CURRVAL FROM DUAL
+     </selectKey>
+	 </insert>
+	 
+	 
+	 
+	 <!-- 글 수정 -->
+	 <update id="updateReview" parameterClass="ReviewVO">
+	 
+	 UPDATE review SET 
+	 		review_title = #review_title#, review_content = #review_content#, 
+	 		review_grade = #review_grade#
+	 	WHERE review_no = #review_no#
+	 
+	 </update>
+	 
+	 
+	 
+	 <!-- 글 삭제 -->
+	 <delete id="deleteReview" parameterClass="int">
+	 
+	 UPDATE reveiw SET
+	 		review_deleteyn = 'y'
+	 	WHERE review_no = #review_no#
+	 
+	 </delete>
+	 
+	 
+	 
+	 <!-- 글 선택 -->
+	 <select id="selectReview" parameterClass = "int">
+	 
+	 SELECT * FROM review WHERE review_no = #review_no#
+	 
+	 </select>
+	 
+	 
+	 
+	 <!-- 글 전체 가져오기 (게시판) -->
+	 <select id="getAllReviewList" resultClass="ReviewVO">
+	 
+     SELECT * FROM review 
+     WHERE review_deleteyn = 'n'
+     ORDER BY review_no desc
+     
+	 </select>
+	 
+	 
+	 
+	 <!-- 본인이 작성 가능한 예약목록 가져오기 -->
+	 <select id="getReservationList" parameterClass="String" resultClass="resVO">
+	 
+    SELECT r.res_no as res_no, 
+    		r.res_client res_client, 
+    		l.law_name as res_lawyer_id, 
+    		r.res_type res_type, 
+    		r.res_date res_date
+	FROM reservation r, lawyer l
+	WHERE r.res_lawyer_id = l.law_id
+	AND r.res_status = '상담완료'
+	AND r.res_client = #mem_id#
+	ORDER BY r.res_no desc
+     
+	 </select>
+	 
+	 
+	 
+	 <!-- 리뷰가 써지면 예약글의 상태를 리뷰완료로 변경한다 -->
+	 <update id = "reservToComp" parameterClass="int">
+	 
+	 UPDATE reservation SET
+	 		res_status = '리뷰완료'
+	 	WHERE res_no = #res_no#
+	 
+	 </update>
+	 
+	 
+	 
+	 <!-- 리뷰가 지워지면 해당 예약글의 상태를 다시 작성가능으로 변경한다 -->
+	 <update id = "reservToDel" parameterClass="int">
+	 
+	 UPDATE reservation SET
+	 		res_status = '상담완료'
+	 	WHERE res_no = (select res_no from review where review_no = #review_no#)
+	 
+	 </update>
+	 
+	 
+	 
+	 <!-- 본인이 쓴 예약글만 가져오기 (마이페이지) -->
+	 <select id="myReviewList" parameterClass="String" resultClass="ReviewVO">
+	 
+     SELECT * FROM review WHERE review_writer_id == #data#
+     
+	 </select>
+	 
+	 
+	 
+	 <!-- 글 검색하기 -->
+	 <select id="getSearchReview" parameterClass="ReviewVO" resultClass="ReviewVO">
+	 	SELECT * FROM review WHERE 1=1 
+	 	<isNotEmpty property="review_writer">
+	 		AND review_writer Like '%' || #review_writer# || '%'
+	 	</isNotEmpty>
+	 	<isNotEmpty property="review_title">
+	 		AND review_title Like '%' || #reivew_title# || '%'
+	 	</isNotEmpty>
+	 	<isNotEmpty property="review_content">
+	 		AND review_content Like '%' || #review_content# || '%'
+	 	</isNotEmpty>
+	 	<isNotEmpty property="review_grade">
+	 		AND review_grade >= #review_grade# 
+	 	</isNotEmpty>
+	 	AND review_deleteyn != 'y'
+	 
+	 </select>
+	 
+     
+</sqlMap>
+
