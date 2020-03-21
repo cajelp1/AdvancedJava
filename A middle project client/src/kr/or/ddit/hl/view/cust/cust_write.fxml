@@ -6,14 +6,15 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+fx:controller="kr.or.ddit.hl.view.cust.CustWrite">
    <children>
       <ImageView fitHeight="639.0" fitWidth="800.0" layoutX="-1.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@테두리.jpeg" />
          </image>
       </ImageView>
-      <Label layoutX="123.0" layoutY="170.0" text="작성자">
+      <Label layoutX="123.0" layoutY="170.0" text="제목">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -28,32 +29,19 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="writer" layoutX="216.0" layoutY="169.0" prefHeight="23.0" prefWidth="200.0" />
+      <TextField fx:id="title" layoutX="216.0" layoutY="169.0" prefHeight="23.0" prefWidth="200.0" />
       <TextArea fx:id="contents" layoutX="216.0" layoutY="222.0" prefHeight="215.0" prefWidth="428.0" />
       <Button fx:id="fileAdd" layoutX="216.0" layoutY="458.0" mnemonicParsing="false" text="파일첨부" />
-      <Button fx:id="btnCancel" layoutX="500.0" layoutY="515.0" mnemonicParsing="false" text="취소하기" />
-      <Button fx:id="btnAdd" layoutX="248.0" layoutY="515.0" mnemonicParsing="false" text="등록하기" />
+      <Button fx:id="btnCancel" layoutX="416.0" layoutY="515.0" mnemonicParsing="false" onAction="#cancel" text="취소하기" />
+      <Button fx:id="btnAdd" layoutX="335.0" layoutY="515.0" mnemonicParsing="false" onAction="#writeArticle" text="등록하기" />
       <ImageView fitHeight="154.0" fitWidth="330.0" layoutX="588.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@공지사항.png" />
          </image></ImageView>
-      <TextField fx:id="title" layoutX="216.0" layoutY="122.0" prefHeight="23.0" prefWidth="200.0" />
-      <Label layoutX="123.0" layoutY="123.0" text="제목">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
       <Label layoutX="520.0" layoutY="82.0" text="QnA&#10;글보기&#10;글쓰기" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnEdit" layoutX="335.0" layoutY="515.0" mnemonicParsing="false" text="수정하기" />
-      <Button fx:id="btnReply" layoutX="416.0" layoutY="515.0" mnemonicParsing="false" text="답글달기" />
-      <CheckBox fx:id="check" layoutX="430.0" layoutY="170.0" mnemonicParsing="false" text="비공개">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </CheckBox>
    </children>
 </AnchorPane>

@@ -5,12 +5,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import kr.or.ddit.hl.view.qna.QnaController;
 
 public class CustMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("cust_main.fxml"));
+		
+		FXMLLoader fx = new FXMLLoader(getClass().getResource("cust_main.fxml"));
+		Parent root = fx.load();
+		CustController cc = fx.getController();
+		cc.setStage(primaryStage);
 		
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("CustomerCenter");

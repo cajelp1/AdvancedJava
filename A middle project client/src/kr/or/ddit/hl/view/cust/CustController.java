@@ -1,5 +1,6 @@
 package kr.or.ddit.hl.view.cust;
 
+import java.io.IOException;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -11,8 +12,12 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -22,6 +27,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import kr.or.ddit.hl.service.cust.ICustService;
 import kr.or.ddit.hl.vo.CustomerCenterVO;
@@ -44,6 +52,12 @@ public class CustController {
     @FXML    private ComboBox<String> combo;
     @FXML    private TextField fieldSearch;
     
+    private int role_code;
+    private Stage stage;
+    private CustController custCon;
+    private CustShow custShow;
+    private CustShow2 custShow2;
+    
     private Registry reg;
     private ICustService service;
     
@@ -54,6 +68,11 @@ public class CustController {
     @FXML
     void initialize() {
         
+    	//세션이 없으므로 일단은 값을 설정한다
+    	role_code = 1;
+    	
+    	custCon = this;
+    	
     	try {
 			// 등록된 원격객체를 찾기위해 Registry객체를 생성한 후 사용할 객체를 불러온다.
 			reg = LocateRegistry.getRegistry("localhost", 7777);
@@ -75,7 +94,64 @@ public class CustController {
     	paging();
     	
     	//테이블에서 글 선택하면 새로운 컨트롤러로 창 띄우기...?
-    	
+    	tableview.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    	    
+    		@Override
+    	    public void handle(MouseEvent mouseEvent) {
+    	        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+    	            if(mouseEvent.getClickCount() == 2){
+    	                
+						//관리자가 아닐 경우
+						if(role_code != 0) {
+    	            	
+    	            	Parent parent = null;
+    	            	
+    	            	try {
+    	            		
+    	        			FXMLLoader loader = new FXMLLoader(getClass().getResource("cust_show.fxml"));
+    	        			parent = loader.load();
+    	        			custShow = loader.getController();
+    	        			
+    	        			// 컨트롤러 시작시 선택된 객체 넘겨주기
+    	        			custShow.initialize(tableview.getSelectionModel().getSelectedItem());
+    	        			custShow.setCc(custCon);;//컨트롤러 넘기기
+    	            		custShow.setStage(stage);
+    	        			
+    	        			Scene scene = new Scene(parent);
+    	        	    	
+    	        	    	stage.setScene(scene);
+    	        	    	stage.show();
+    	            		
+    	            	}catch(IOException ex) {ex.printStackTrace();}
+    	            	
+    	            	
+    	            	//관리자일 경우
+    	            	if(role_code == 1) {
+    	            	
+    	            	try {
+    	            		
+    	        			FXMLLoader loader = new FXMLLoader(getClass().getResource("cust_Show2.fxml"));
+    	        			parent = loader.load();
+    	        			custShow2 = loader.getController();
+    	        			
+    	        			// 컨트롤러 시작시 선택된 객체 넘겨주기
+    	        			custShow2.initialize(tableview.getSelectionModel().getSelectedItem());
+    	        			custShow2.setCc(custCon);//컨트롤러 넘기기
+    	            		custShow2.setStage(stage);
+    	        			
+    	        			Scene scene = new Scene(parent);
+    	        	    	
+    	        	    	stage.setScene(scene);
+    	        	    	stage.show();
+    	            		
+    	            	}catch(IOException ex) {ex.printStackTrace();}
+    	            	}
+    	            }
+    	        }
+    	    }
+    	}
+    	});
+
     }
     
 	
@@ -188,6 +264,26 @@ public class CustController {
 		infoAlert.showAndWait();
 	}
 
+
+	public Stage getStage() {
+		return stage;
+	}
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+	public CustShow getCustShow() {
+		return custShow;
+	}
+	public void setCustShow(CustShow custShow) {
+		this.custShow = custShow;
+	}
+	public CustShow2 getCustShow2() {
+		return custShow2;
+	}
+	public void setCustShow2(CustShow2 custShow2) {
+		this.custShow2 = custShow2;
+	}
+	
 }
 
 

@@ -354,12 +354,6 @@ public class QnaController {
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
-//	public QnaController getQnaCont() {
-//		return qnaCont;
-//	}
-//	public void setQnaCont(QnaController qnaCont) {
-//		this.qnaCont = qnaCont;
-//	}
 	public QnaShow getQnaShow() {
 		return qnaShow;
 	}

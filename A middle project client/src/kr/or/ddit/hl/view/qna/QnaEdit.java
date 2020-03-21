@@ -34,9 +34,7 @@ public class QnaEdit {
     @FXML    private Button btnCancel;
     @FXML    private Button btnAdd;
     
-    private String id;
-    private String nickname;
-    private int role_code;
+    //private String nickname;
     
     private Registry reg;
     private IQnaService service;
@@ -50,11 +48,6 @@ public class QnaEdit {
     void initialize(QnaBoardVO qv) {
     	
     	vo = qv;
-    	
-    	//세션이 없으므로 일단 임의의 값을 준다
-    	id = "asdf";
-    	nickname = "asdf";
-    	role_code = 1;
     	
     	//내용과 제목 설정
     	title.setText(vo.getQna_title());
@@ -106,7 +99,7 @@ public class QnaEdit {
     	}else if(contents.getText().trim().isEmpty()) {
     		errMsg("오류","내용을 입력하세요");
     	}else {
-    		vo.setQna_writer(nickname);
+    		//vo.setQna_writer(nickname);
     		vo.setQna_title(title.getText());
     		vo.setQna_content(contents.getText());
     		vo.setQna_secret_yn(state);
