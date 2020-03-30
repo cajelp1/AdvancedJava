@@ -17,8 +17,8 @@ private String nickName; // 대화명
 		
 		Socket socket = null;
 		try {
-			String serverIp = "192.168.205.10";
-			socket = new Socket(serverIp, 7777);
+			String serverIp = "192.168.205.8";
+			socket = new Socket(serverIp, 9090);
 			
 			System.out.println("서버에 연결되었습니다.");
 			

@@ -55,8 +55,9 @@ public class HLMain {
 			
 		}catch(RemoteException e) {e.printStackTrace();}
 		
-		
-		
 	}
+	
+	
+	//tcp 채팅 구현
 	
 }
