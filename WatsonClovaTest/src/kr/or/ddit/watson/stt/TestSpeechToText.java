@@ -27,8 +27,8 @@ import com.ibm.watson.developer_cloud.speech_to_text.v1.websocket.BaseRecognizeC
  *
  */
 public class TestSpeechToText {
-	private static final String API_KEY = "vgq9Ia8THlYqctHMufVy5n5HpF5MHribQBxJIY_TS92b";
-	private static final String URL = "https://stream.watsonplatform.net/speech-to-text/api";
+	private static final String API_KEY = "Y_Gj8R0uqeKFPyDP38tnJEmOVDSlk2golwS0OHkncKXz";
+	private static final String URL = "https://api.kr-seo.speech-to-text.watson.cloud.ibm.com/instances/2503da46-ac97-4ef3-a7d8-e7d313314058";
 	
 	private SpeechToText service; // SpeechToText 서비스
 	

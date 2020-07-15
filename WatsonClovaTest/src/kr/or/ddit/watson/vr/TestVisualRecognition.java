@@ -14,7 +14,7 @@ public class TestVisualRecognition {
 	
 	public void test(){
 		
-	   IamOptions options = new IamOptions.Builder().apiKey("2GmyYnQeOcs72lRsXK8Q7sWeTXcwjMwuqkQ7CRhlXnMs").build();
+	   IamOptions options = new IamOptions.Builder().apiKey("EkuW3sHkD-P8rhEgr-DZf2WiyZ44BQepxunYGT2nXAwn").build();
 	   
 	   VisualRecognition service = new VisualRecognition("2018-03-19", options);
 	   

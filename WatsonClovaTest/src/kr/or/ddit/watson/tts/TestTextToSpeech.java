@@ -25,8 +25,8 @@ import com.ibm.watson.developer_cloud.text_to_speech.v1.util.WaveUtils;
  */
 public class TestTextToSpeech {
 	
-	private static final String API_KEY = "hXH0Ol7Ub5HZ9CjQu5K20Ai9RA939A9Zz9yGNe4fz8fR";
-	private static final String URL = "https://stream.watsonplatform.net/text-to-speech/api";
+	private static final String API_KEY = "qm2-vOyev7IWulGlKTbtoiL8vlS9mckR8sb5I1LYjOqU";
+	private static final String URL = "https://api.kr-seo.text-to-speech.watson.cloud.ibm.com/instances/5f9ceac6-f055-4c1a-ac58-e836d8575367";
 
 	private TextToSpeech  service; // TextToSpeech 서비스
 	
